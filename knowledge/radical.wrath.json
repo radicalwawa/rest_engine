@@ -1,6 +1,7 @@
 {
   "track_id": "radical.wrath",
-  "version": "0.1",
-  "runs": [],
-  "learned": []
+  "version": "0.2",
+  "experiments": [],
+  "proven_patterns": [],
+  "failed_patterns": []
 }
