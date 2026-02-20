@@ -1,15 +1,85 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "track.schema.json",
-  "title": "Track",
-  "description": "Schema for a track resource",
+  "$id": "rest_engine/schemas/track.schema.json",
+  "title": "REST Track Schema",
   "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "theme",
+    "energy_profile",
+    "emotional_tone",
+    "lyrical_focus",
+    "keyword_vector",
+    "techno_profile",
+    "constraints",
+    "calibration"
+  ],
   "properties": {
-    "id": { "type": "string", "description": "Unique track identifier" },
-    "name": { "type": "string", "description": "Track name" },
-    "artist": { "type": "string", "description": "Artist name" },
-    "duration": { "type": "number", "minimum": 0, "description": "Duration in seconds" },
-    "url": { "type": "string", "format": "uri", "description": "Optional URL" }
-  },
-  "additionalProperties": true
+    "id": {
+      "type": "string",
+      "enum": [
+        "radical.luxr",
+        "radical.pride",
+        "radical.wrath",
+        "radical.sloth",
+        "radical.greed",
+        "radical.glutt"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "theme": { "type": "string" },
+    "energy_profile": { "type": "string" },
+    "emotional_tone": { "type": "string" },
+    "lyrical_focus": { "type": "string" },
+    "keyword_vector": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "techno_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drive_level",
+        "bass_weight",
+        "texture_type",
+        "spatial_depth"
+      ],
+      "properties": {
+        "drive_level": { "type": "string" },
+        "bass_weight": { "type": "string" },
+        "texture_type": { "type": "string" },
+        "spatial_depth": { "type": "string" }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bpm_override", "structure_override"],
+      "properties": {
+        "bpm_override": { "type": ["integer", "null"] },
+        "structure_override": { "type": ["string", "null"] }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tested_bpms", "proven_bpm", "drift_notes"],
+      "properties": {
+        "tested_bpms": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "proven_bpm": { "type": ["integer", "null"] },
+        "drift_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
 }
