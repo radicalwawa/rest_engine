@@ -1,1 +1,12 @@
-{} 
+{
+  "artist_id": "radical.noface",
+  "version": "0.1",
+  "max_bars": 8,
+  "lyrical_complexity": "high",
+  "vocal_melodic_range": "minimal",
+  "delivery_style": "rhythmic_spoken",
+  "persona": "young_male_controlled",
+  "melodic_expressiveness": "disabled",
+  "emotional_variance": "low",
+  "performance_flash": "disabled"
+}
