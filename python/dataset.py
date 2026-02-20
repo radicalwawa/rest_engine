@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, Dict, Optional, List, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNS_DIR = ROOT / "runs"

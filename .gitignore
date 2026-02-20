@@ -2,6 +2,7 @@
 runs/
 
 # Python
+python/out/
 __pycache__/
 *.py[cod]
 .python/
