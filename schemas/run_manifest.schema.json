@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rest_engine/schemas/run_manifest.schema.json",
+  "title": "REST Run Manifest Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "timestamp", "mode", "track_id", "bpm", "prompt_files"],
+  "properties": {
+    "run_id": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "mode": { "type": "string", "enum": ["production", "calibration"] },
+    "track_id": {
+      "type": "string",
+      "enum": [
+        "radical.luxr",
+        "radical.pride",
+        "radical.wrath",
+        "radical.sloth",
+        "radical.greed",
+        "radical.glutt"
+      ]
+    },
+    "bpm": { "type": "integer" },
+    "prompt_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": { "type": "string" }
+  }
+}
