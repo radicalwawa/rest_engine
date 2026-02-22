@@ -1,1 +1,13 @@
-{} 
+{
+  "version": "2.0",
+  "active_tracks": [
+    "radical.grey",
+    "radical.blue",
+    "radical.green",
+    "radical.cream",
+    "radical.black"
+  ],
+  "run_ids": [],
+  "updated_at": null,
+  "notes": null
+}
