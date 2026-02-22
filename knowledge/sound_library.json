@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "library_id": "techno_sound_prompt_library",
+  "bpm_calibration_set": [134, 136, 138, 140],
+  "rules": {
+    "json_only": true,
+    "no_multi_variable": true,
+    "bpm_override_path": "constraints.bpm_override",
+    "null_over_omission": true
+  },
+  "items": [
+    {
+      "sound_class": "cold_industrial",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "cold industrial techno, metallic, factory, precise",
+        "sound_tokens": ["metal", "reverb", "stabs", "percussion", "synth"],
+        "negative_tokens": ["warm", "organic", "melodic", "soft"],
+        "structure_hint": "steady build, sparse drops",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "distorted_hard_techno",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "distorted hard techno, aggressive, raw",
+        "sound_tokens": ["distortion", "kick", "hats", "bass", "noise"],
+        "negative_tokens": ["clean", "polished", "ambient"],
+        "structure_hint": "relentless drive, peak energy",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "heavy_minimal_groove",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "heavy minimal groove, weight, swing",
+        "sound_tokens": ["groove", "kick", "clap", "bassline", "minimal"],
+        "negative_tokens": ["busy", "melodic", "chaotic"],
+        "structure_hint": "locked groove, subtle variation",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "hypnotic_loop_techno",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "hypnotic loop techno, repetitive, trance-inducing",
+        "sound_tokens": ["loop", "delay", "filter", "sequence", "hats"],
+        "negative_tokens": ["abrupt", "melodic", "vocal"],
+        "structure_hint": "evolving loop, gradual shift",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "high_shine_peak",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "high shine peak techno, bright, peak-time",
+        "sound_tokens": ["bright", "lead", "crash", "build", "release"],
+        "negative_tokens": ["dark", "muffled", "low-end"],
+        "structure_hint": "build to peak, clear drop",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "saturated_overload",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "saturated overload techno, clipping, dense",
+        "sound_tokens": ["saturation", "compression", "layers", "drive"],
+        "negative_tokens": ["clean", "dynamic", "sparse"],
+        "structure_hint": "wall of sound, sustained intensity",
+        "lyric_hint": "none"
+      }
+    },
+    {
+      "sound_class": "dark_hypnotic_modular",
+      "best_bpm": null,
+      "prompt_pack": {
+        "style_core": "dark hypnotic modular techno, eurorack, analog",
+        "sound_tokens": ["modular", "sequence", "filter", "sub", "atmosphere"],
+        "negative_tokens": ["digital", "bright", "vocal"],
+        "structure_hint": "modular drift, slow morph",
+        "lyric_hint": "none"
+      }
+    }
+  ]
+}
