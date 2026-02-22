@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "map_id": "track_to_soundclass_v1",
+  "primary_genre": "rap_techno",
+  "mappings": [
+    {
+      "track_id": "radical.luxr",
+      "sound_class": "high_shine_peak",
+      "emotion_profile": "luxury_shine",
+      "notes": null
+    },
+    {
+      "track_id": "radical.pride",
+      "sound_class": "cold_industrial",
+      "emotion_profile": "dominant_control",
+      "notes": null
+    },
+    {
+      "track_id": "radical.wrath",
+      "sound_class": "distorted_hard_techno",
+      "emotion_profile": "anger_pressure",
+      "notes": null
+    },
+    {
+      "track_id": "radical.sloth",
+      "sound_class": "heavy_minimal_groove",
+      "emotion_profile": "heavy_low_energy",
+      "notes": null
+    },
+    {
+      "track_id": "radical.greed",
+      "sound_class": "hypnotic_loop_techno",
+      "emotion_profile": "obsessive_repetition",
+      "notes": null
+    },
+    {
+      "track_id": "radical.glutt",
+      "sound_class": "saturated_overload",
+      "emotion_profile": "overconsumption_overload",
+      "notes": null
+    },
+    {
+      "track_id": "radical.envy",
+      "sound_class": "dark_hypnotic_modular",
+      "emotion_profile": "tense_paranoia",
+      "notes": null
+    }
+  ]
+}
