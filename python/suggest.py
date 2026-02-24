@@ -3,6 +3,7 @@ Generate deterministic prompt suggestions from sound_map + sound_library + track
 Output: python/out/suggestions/<track_id>.suggestion.json and _bundle.json.
 """
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -39,6 +40,45 @@ def _build_library_index(library: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
     return index
 
 
+def _build_color_emotion_lookup(sound_map: Dict[str, Any]) -> Dict[str, str]:
+    """Map color -> emotion_core from sound_map colors array."""
+    lookup: Dict[str, str] = {}
+    for c in sound_map.get("colors") or []:
+        color = c.get("color")
+        core = c.get("emotion_core")
+        if color is not None:
+            lookup[color] = core if core is not None else ""
+    return lookup
+
+
+def _variant_from_seed(
+    prompt_text: str,
+    bpm_override: int,
+    sound_class: str,
+    color: str,
+    emotion_core: str,
+    color_profile: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Deterministic kit/flow/template selection. Seed = same payload order as dataset hash."""
+    payload = f"{prompt_text}\n{bpm_override}\n{sound_class}\n{color}\n{emotion_core}"
+    h = int(hashlib.sha256(payload.encode("utf-8")).hexdigest(), 16)
+    kits = color_profile.get("kits") or []
+    flows = color_profile.get("flows") or []
+    templates = color_profile.get("templates") or []
+    t_i = (h % len(templates)) if templates else 0
+    f_i = ((h // 7) % len(flows)) if flows else 0
+    k_i = ((h // 13) % len(kits)) if kits else 0
+    return {
+        "template_id": templates[t_i]["id"] if t_i < len(templates) else None,
+        "flow_id": flows[f_i]["id"] if f_i < len(flows) else None,
+        "kit_id": kits[k_i]["id"] if k_i < len(kits) else None,
+        "template_index": t_i,
+        "flow_index": f_i,
+        "kit_index": k_i,
+        "seed_hash": h,
+    }
+
+
 def _get_bpm_from_track(track: Dict[str, Any]) -> Optional[int]:
     """proven_bpm, bpm_lock, or constraints.bpm_override."""
     cal = track.get("calibration") or {}
@@ -60,9 +100,11 @@ def _build_suggestion(
     mode: str,
     bpm_override: int,
     bpm_source: str,
+    color: str,
+    emotion_core: str,
     sound_class: str,
-    emotion_profile: str,
     prompt_pack: Dict[str, Any],
+    color_tone: str,
 ) -> Dict[str, Any]:
     style_core = prompt_pack.get("style_core") or ""
     sound_tokens = list(prompt_pack.get("sound_tokens") or [])
@@ -80,6 +122,8 @@ def _build_suggestion(
         + structure_hint
         + " Lyrics: "
         + lyric_hint
+        + " Color: "
+        + color_tone
     )
 
     return {
@@ -96,8 +140,9 @@ def _build_suggestion(
             "composer_notes": None,
         },
         "resolved": {
+            "color": color,
+            "emotion_core": emotion_core,
             "sound_class": sound_class,
-            "emotion_profile": emotion_profile,
             "bpm_source": bpm_source,
         },
         "prompt_text": prompt_text,
@@ -107,7 +152,7 @@ def _build_suggestion(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate deterministic prompt suggestions")
     parser.add_argument("--out", default=str(DEFAULT_OUT), help="Output directory for suggestion JSONs")
-    parser.add_argument("--track-id", default=None, help="Generate only this track (e.g. radical.wrath)")
+    parser.add_argument("--track-id", default=None, help="Generate only this track (e.g. radical.grey)")
     parser.add_argument("--mode", choices=["calibration", "production"], default=None, help="Override mode")
     parser.add_argument("--bpm", type=int, choices=[134, 136, 138, 140], default=None, help="Override BPM (calibration only)")
     args = parser.parse_args()
@@ -118,6 +163,8 @@ def main() -> int:
     sound_map = _load_json(SOUND_MAP_PATH)
     library = _load_json(SOUND_LIBRARY_PATH)
     library_index = _build_library_index(library)
+    color_emotion = _build_color_emotion_lookup(sound_map)
+    color_profiles = library.get("color_profiles") or {}
     bpm_calibration_set = library.get("bpm_calibration_set")
     if not bpm_calibration_set or not isinstance(bpm_calibration_set, list):
         bpm_calibration_set = [134, 136, 138, 140]
@@ -136,8 +183,10 @@ def main() -> int:
         track_id = m.get("track_id")
         if not track_id:
             continue
+        color = m.get("color") or ""
         sound_class = m.get("sound_class")
-        emotion_profile = m.get("emotion_profile") or ""
+        emotion_core = color_emotion.get(color) or ""
+        color_tone = (color_profiles.get(color) or {}).get("tone") or ""
 
         if sound_class not in library_index:
             print(f"sound_class not in library: {sound_class}", file=sys.stderr)
@@ -181,10 +230,22 @@ def main() -> int:
             mode=mode,
             bpm_override=bpm_override,
             bpm_source=bpm_source,
+            color=color,
+            emotion_core=emotion_core,
             sound_class=sound_class,
-            emotion_profile=emotion_profile,
             prompt_pack=prompt_pack,
+            color_tone=color_tone,
         )
+        color_profile = color_profiles.get(color) or {}
+        variant = _variant_from_seed(
+            prompt_text=sug["prompt_text"],
+            bpm_override=bpm_override,
+            sound_class=sound_class,
+            color=color,
+            emotion_core=emotion_core,
+            color_profile=color_profile,
+        )
+        sug["resolved"]["variant"] = variant
         suggestions.append(sug)
 
         out_path = out_dir / f"{track_id}.suggestion.json"
