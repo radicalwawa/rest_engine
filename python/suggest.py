@@ -80,6 +80,22 @@ def _variant_from_seed(
     }
 
 
+def _prompt_text_from_skeleton(
+    skeleton: str,
+    color: str,
+    emotion_core: str,
+    bpm: int,
+    sound_class_used: str,
+) -> str:
+    """Replace placeholders in template skeleton. Deterministic."""
+    return (
+        skeleton.replace("{{color}}", color)
+        .replace("{{emotion}}", emotion_core)
+        .replace("{{bpm}}", str(bpm))
+        .replace("{{sound_class}}", sound_class_used)
+    )
+
+
 def _get_bpm_from_track(track: Dict[str, Any]) -> Optional[int]:
     """proven_bpm, bpm_lock, or constraints.bpm_override."""
     cal = track.get("calibration") or {}
@@ -247,6 +263,24 @@ def main() -> int:
             color_profile=color_profile,
         )
         sug["resolved"]["variant"] = variant
+        effective_bpm = bpm_override
+        kits = color_profile.get("kits") or []
+        templates = color_profile.get("templates") or []
+        t_i = variant.get("template_index", 0)
+        k_i = variant.get("kit_index", 0)
+        selected_template = templates[t_i] if t_i < len(templates) else {}
+        selected_kit = kits[k_i] if k_i < len(kits) else {}
+        skeleton = selected_template.get("prompt_skeleton") if selected_template else None
+        effective_sound_class = selected_kit.get("sound_class") if selected_kit else sound_class
+        if skeleton:
+            sug["prompt_text"] = _prompt_text_from_skeleton(
+                skeleton, color, emotion_core, effective_bpm, effective_sound_class or sound_class
+            )
+            sug["resolved"]["template_applied"] = True
+            sug["resolved"]["bpm_used"] = effective_bpm
+            sug["resolved"]["sound_class_used"] = effective_sound_class or sound_class
+        else:
+            sug["resolved"]["template_applied"] = False
         suggestions.append(sug)
 
         out_path = out_dir / f"{track_id}.suggestion.json"
