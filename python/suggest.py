@@ -61,7 +61,8 @@ def _variant_from_seed(
 ) -> Dict[str, Any]:
     """Deterministic kit/flow/template selection. Seed = same payload order as dataset hash."""
     payload = f"{prompt_text}\n{bpm_override}\n{sound_class}\n{color}\n{emotion_core}"
-    h = int(hashlib.sha256(payload.encode("utf-8")).hexdigest(), 16)
+    seed_hash_hex = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    h = int(seed_hash_hex, 16)
     kits = color_profile.get("kits") or []
     flows = color_profile.get("flows") or []
     templates = color_profile.get("templates") or []
@@ -75,7 +76,7 @@ def _variant_from_seed(
         "template_index": t_i,
         "flow_index": f_i,
         "kit_index": k_i,
-        "seed_hash": h,
+        "seed_hash_hex": seed_hash_hex,
     }
 
 
