@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.2",
   "library_id": "techno_sound_prompt_library",
   "bpm_calibration_set": [134, 136, 138, 140],
   "rules": {
@@ -8,83 +8,229 @@
     "bpm_override_path": "constraints.bpm_override",
     "null_over_omission": true
   },
-  "items": [
-    {
-      "sound_class": "cold_industrial",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "cold industrial techno, metallic, factory, precise",
-        "sound_tokens": ["metal", "reverb", "stabs", "percussion", "synth"],
-        "negative_tokens": ["warm", "organic", "melodic", "soft"],
-        "structure_hint": "steady build, sparse drops",
-        "lyric_hint": "none"
-      }
+  "color_profiles": {
+    "grey": {
+      "tone": "industrial concrete aggression",
+      "vocal_style": "short clipped command",
+      "mix_target": "dry tight mid-focused",
+      "energy": "brutal controlled",
+      "notes": null,
+      "kits": [
+        {"id": "grey_kit_1", "name": "factory_core", "notes": null, "sound_class": "cold_industrial", "arrangement": "sparse_stabs", "mix_target": "dry tight mid-focused", "energy_band": "mid"},
+        {"id": "grey_kit_2", "name": "metropolis_drive", "notes": null, "sound_class": "cold_industrial", "arrangement": "four_on_floor", "mix_target": "dry tight mid-focused", "energy_band": "high"},
+        {"id": "grey_kit_3", "name": "concrete_grid", "notes": null, "sound_class": "cold_industrial", "arrangement": "minimal_perc", "mix_target": "dry tight mid-focused", "energy_band": "low-mid"},
+        {"id": "grey_kit_4", "name": "blend_drive", "notes": null, "sound_class": "cold_industrial", "arrangement": "blend_drive", "mix_target": "hard-minimal metallic perc", "energy_band": "mid"},
+        {"id": "grey_kit_5", "name": "percussion_carry", "notes": null, "sound_class": "hard_minimal", "arrangement": "percussion_carry", "mix_target": "dry tight mid-focused", "energy_band": "mid"},
+        {"id": "grey_kit_6", "name": "reverb_bridge", "notes": null, "sound_class": "metallic_perc", "arrangement": "reverb_bridge", "mix_target": "metallic perc", "energy_band": "low-mid"},
+        {"id": "grey_kit_7", "name": "vinyl_ornament", "notes": null, "sound_class": "cold_industrial", "arrangement": "vinyl_ornament", "mix_target": "metallic perc", "energy_band": "mid"},
+        {"id": "grey_kit_8", "name": "sub_minimal_verse", "notes": null, "sound_class": "hard_minimal", "arrangement": "sub_minimal_verse", "mix_target": "hard-minimal metallic perc", "energy_band": "low-mid"},
+        {"id": "grey_kit_9", "name": "hook_riser_soft", "notes": null, "sound_class": "metallic_perc", "arrangement": "hook_riser_soft", "mix_target": "dry tight mid-focused", "energy_band": "high"}
+      ],
+      "flows": [
+        {"id": "grey_flow_1", "name": "command_clip", "notes": null, "delivery": "staccato", "cadence": "short_phrases", "rhyme_density": "low", "adlibs_policy": "sparse"},
+        {"id": "grey_flow_2", "name": "drill_cold", "notes": null, "delivery": "monotone", "cadence": "locked", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "grey_flow_3", "name": "order_bark", "notes": null, "delivery": "aggressive", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "grey_flow_4", "name": "loop_hook_last_word", "notes": null, "delivery": "echo", "cadence": "hook_repeat", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "grey_flow_5", "name": "mono_phrase_hook", "notes": null, "delivery": "monotone", "cadence": "same_phrase", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "grey_flow_6", "name": "scratch_call_response", "notes": null, "delivery": "scratch_cuts", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "grey_flow_7", "name": "tight_verse_open_vowels", "notes": null, "delivery": "tight", "cadence": "open_vowels", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "grey_flow_8", "name": "half_time_release", "notes": null, "delivery": "half_time", "cadence": "release", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "grey_flow_9", "name": "adlib_minimal", "notes": null, "delivery": "clean", "cadence": "minimal", "rhyme_density": "medium", "adlibs_policy": "minimal"}
+      ],
+      "templates": [
+        {"id": "grey_template_1", "name": "industrial_core", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} rap techno {{bpm}} bpm {{sound_class}} industrial concrete aggression"},
+        {"id": "grey_template_2", "name": "metropolis_skeleton", "notes": null, "prompt_skeleton": "{{sound_class}} {{emotion}} {{color}} tone at {{bpm}} bpm brutal discipline"},
+        {"id": "grey_template_3", "name": "concrete_rage_skeleton", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm dry tight mid-focused"},
+        {"id": "grey_template_4", "name": "techno_intro_dj", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm techno intro DJ-mix no hard drop soft blend transition"},
+        {"id": "grey_template_5", "name": "verse_sub_minimal", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 1 sub minimal {{sound_class}} {{bpm}} bpm soft blend"},
+        {"id": "grey_template_6", "name": "hook_last_word_loop", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook same phrase loop last word loop {{sound_class}} {{bpm}} bpm minimal lyric variation"},
+        {"id": "grey_template_7", "name": "interlude_perc_carry", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} techno interlude percussion carry-over {{sound_class}} {{bpm}} bpm DJ-friendly transitions"},
+        {"id": "grey_template_8", "name": "verse_scratch_ornaments", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 2 scratch ornaments {{sound_class}} {{bpm}} bpm vinyl micro dose"},
+        {"id": "grey_template_9", "name": "outro_fade_tail", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook intense outro fade tail {{sound_class}} {{bpm}} bpm no hard drop soft blend"}
+      ]
     },
-    {
-      "sound_class": "distorted_hard_techno",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "distorted hard techno, aggressive, raw",
-        "sound_tokens": ["distortion", "kick", "hats", "bass", "noise"],
-        "negative_tokens": ["clean", "polished", "ambient"],
-        "structure_hint": "relentless drive, peak energy",
-        "lyric_hint": "none"
-      }
+    "blue": {
+      "tone": "emotional atmospheric sorrow",
+      "vocal_style": "longer breathy phrasing",
+      "mix_target": "wide stereo depth",
+      "energy": "internal tension",
+      "notes": null,
+      "kits": [
+        {"id": "blue_kit_1", "name": "atmospheric_depth", "notes": null, "sound_class": "dark_hypnotic_modular", "arrangement": "pad_forward", "mix_target": "wide stereo depth", "energy_band": "low"},
+        {"id": "blue_kit_2", "name": "sorrow_sub", "notes": null, "sound_class": "dark_hypnotic_modular", "arrangement": "sub_melody", "mix_target": "wide stereo depth", "energy_band": "sub"},
+        {"id": "blue_kit_3", "name": "tension_build", "notes": null, "sound_class": "dark_hypnotic_modular", "arrangement": "gradual_layers", "mix_target": "wide stereo depth", "energy_band": "mid"},
+        {"id": "blue_kit_4", "name": "blend_drive", "notes": null, "sound_class": "deep_melodic", "arrangement": "blend_drive", "mix_target": "airy pads", "energy_band": "mid"},
+        {"id": "blue_kit_5", "name": "percussion_carry", "notes": null, "sound_class": "dub_techno", "arrangement": "percussion_carry", "mix_target": "wide stereo depth", "energy_band": "mid"},
+        {"id": "blue_kit_6", "name": "reverb_bridge", "notes": null, "sound_class": "airy_pads", "arrangement": "reverb_bridge", "mix_target": "dub techno airy", "energy_band": "low"},
+        {"id": "blue_kit_7", "name": "vinyl_ornament", "notes": null, "sound_class": "dark_hypnotic_modular", "arrangement": "vinyl_ornament", "mix_target": "airy pads", "energy_band": "mid"},
+        {"id": "blue_kit_8", "name": "sub_minimal_verse", "notes": null, "sound_class": "deep_melodic", "arrangement": "sub_minimal_verse", "mix_target": "wide stereo depth", "energy_band": "sub"},
+        {"id": "blue_kit_9", "name": "hook_riser_soft", "notes": null, "sound_class": "dub_techno", "arrangement": "hook_riser_soft", "mix_target": "airy pads", "energy_band": "mid"}
+      ],
+      "flows": [
+        {"id": "blue_flow_1", "name": "breathy_long", "notes": null, "delivery": "breathy", "cadence": "long_phrases", "rhyme_density": "medium", "adlibs_policy": "atmospheric"},
+        {"id": "blue_flow_2", "name": "introspective_slow", "notes": null, "delivery": "soft", "cadence": "slow", "rhyme_density": "high", "adlibs_policy": "reverb_tails"},
+        {"id": "blue_flow_3", "name": "tension_phrase", "notes": null, "delivery": "tense", "cadence": "extended", "rhyme_density": "medium", "adlibs_policy": "sparse"},
+        {"id": "blue_flow_4", "name": "loop_hook_last_word", "notes": null, "delivery": "echo", "cadence": "hook_repeat", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "blue_flow_5", "name": "mono_phrase_hook", "notes": null, "delivery": "soft", "cadence": "same_phrase", "rhyme_density": "medium", "adlibs_policy": "reverb_tails"},
+        {"id": "blue_flow_6", "name": "scratch_call_response", "notes": null, "delivery": "scratch_cuts", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "blue_flow_7", "name": "tight_verse_open_vowels", "notes": null, "delivery": "tight", "cadence": "open_vowels", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "blue_flow_8", "name": "half_time_release", "notes": null, "delivery": "half_time", "cadence": "release", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "blue_flow_9", "name": "adlib_minimal", "notes": null, "delivery": "clean", "cadence": "minimal", "rhyme_density": "medium", "adlibs_policy": "minimal"}
+      ],
+      "templates": [
+        {"id": "blue_template_1", "name": "blue_sorrow_core", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm emotional atmospheric sorrow"},
+        {"id": "blue_template_2", "name": "atmospheric_skeleton", "notes": null, "prompt_skeleton": "{{sound_class}} {{emotion}} {{color}} at {{bpm}} bpm wide stereo depth"},
+        {"id": "blue_template_3", "name": "internal_tension_skeleton", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{bpm}} bpm {{sound_class}} internal tension"},
+        {"id": "blue_template_4", "name": "techno_intro_dj", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm techno intro DJ-mix atmospheric no hard drop soft blend"},
+        {"id": "blue_template_5", "name": "verse_sub_minimal", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 1 sub minimal {{sound_class}} {{bpm}} bpm wide stereo depth"},
+        {"id": "blue_template_6", "name": "hook_last_word_loop", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook same phrase loop last word loop {{sound_class}} {{bpm}} bpm emotional sorrow"},
+        {"id": "blue_template_7", "name": "interlude_perc_carry", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} techno interlude percussion carry-over {{sound_class}} {{bpm}} bpm DJ-friendly transitions"},
+        {"id": "blue_template_8", "name": "verse_scratch_ornaments", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 2 scratch ornaments {{sound_class}} {{bpm}} bpm vinyl micro dose"},
+        {"id": "blue_template_9", "name": "outro_fade_tail", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook intense outro fade tail {{sound_class}} {{bpm}} bpm no hard drop soft blend"}
+      ]
     },
-    {
-      "sound_class": "heavy_minimal_groove",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "heavy minimal groove, weight, swing",
-        "sound_tokens": ["groove", "kick", "clap", "bassline", "minimal"],
-        "negative_tokens": ["busy", "melodic", "chaotic"],
-        "structure_hint": "locked groove, subtle variation",
-        "lyric_hint": "none"
-      }
+    "green": {
+      "tone": "obsessive loop growth",
+      "vocal_style": "mantra repetition",
+      "mix_target": "stable bass forward",
+      "energy": "expansive drive",
+      "notes": null,
+      "kits": [
+        {"id": "green_kit_1", "name": "loop_forward", "notes": null, "sound_class": "hypnotic_loop_techno", "arrangement": "single_loop", "mix_target": "stable bass forward", "energy_band": "mid"},
+        {"id": "green_kit_2", "name": "growth_layers", "notes": null, "sound_class": "hypnotic_loop_techno", "arrangement": "additive", "mix_target": "stable bass forward", "energy_band": "low-mid"},
+        {"id": "green_kit_3", "name": "obsessive_sub", "notes": null, "sound_class": "hypnotic_loop_techno", "arrangement": "bass_anchor", "mix_target": "stable bass forward", "energy_band": "sub"},
+        {"id": "green_kit_4", "name": "blend_drive", "notes": null, "sound_class": "acid_hypno", "arrangement": "blend_drive", "mix_target": "saturated bass", "energy_band": "mid"},
+        {"id": "green_kit_5", "name": "percussion_carry", "notes": null, "sound_class": "rolling_groove", "arrangement": "percussion_carry", "mix_target": "stable bass forward", "energy_band": "mid"},
+        {"id": "green_kit_6", "name": "reverb_bridge", "notes": null, "sound_class": "saturated_bass", "arrangement": "reverb_bridge", "mix_target": "rolling groove saturated", "energy_band": "low-mid"},
+        {"id": "green_kit_7", "name": "vinyl_ornament", "notes": null, "sound_class": "hypnotic_loop_techno", "arrangement": "vinyl_ornament", "mix_target": "saturated bass", "energy_band": "mid"},
+        {"id": "green_kit_8", "name": "sub_minimal_verse", "notes": null, "sound_class": "acid_hypno", "arrangement": "sub_minimal_verse", "mix_target": "stable bass forward", "energy_band": "sub"},
+        {"id": "green_kit_9", "name": "hook_riser_soft", "notes": null, "sound_class": "rolling_groove", "arrangement": "hook_riser_soft", "mix_target": "saturated bass", "energy_band": "high"}
+      ],
+      "flows": [
+        {"id": "green_flow_1", "name": "mantra_repeat", "notes": null, "delivery": "hypnotic", "cadence": "repetitive", "rhyme_density": "low", "adlibs_policy": "echo"},
+        {"id": "green_flow_2", "name": "growth_phrase", "notes": null, "delivery": "driven", "cadence": "looping", "rhyme_density": "medium", "adlibs_policy": "minimal"},
+        {"id": "green_flow_3", "name": "expansion_lock", "notes": null, "delivery": "locked", "cadence": "mantra", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "green_flow_4", "name": "loop_hook_last_word", "notes": null, "delivery": "echo", "cadence": "hook_repeat", "rhyme_density": "low", "adlibs_policy": "echo"},
+        {"id": "green_flow_5", "name": "mono_phrase_hook", "notes": null, "delivery": "hypnotic", "cadence": "same_phrase", "rhyme_density": "medium", "adlibs_policy": "minimal"},
+        {"id": "green_flow_6", "name": "scratch_call_response", "notes": null, "delivery": "scratch_cuts", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "green_flow_7", "name": "tight_verse_open_vowels", "notes": null, "delivery": "tight", "cadence": "open_vowels", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "green_flow_8", "name": "half_time_release", "notes": null, "delivery": "half_time", "cadence": "release", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "green_flow_9", "name": "adlib_minimal", "notes": null, "delivery": "clean", "cadence": "minimal", "rhyme_density": "medium", "adlibs_policy": "minimal"}
+      ],
+      "templates": [
+        {"id": "green_template_1", "name": "saturated_growth_core", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm obsessive loop growth"},
+        {"id": "green_template_2", "name": "hypnotic_skeleton", "notes": null, "prompt_skeleton": "{{sound_class}} {{emotion}} {{color}} {{bpm}} bpm stable bass forward"},
+        {"id": "green_template_3", "name": "expansion_skeleton", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{bpm}} bpm {{sound_class}} expansive drive"},
+        {"id": "green_template_4", "name": "techno_intro_dj", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm techno intro DJ-mix loop growth no hard drop soft blend"},
+        {"id": "green_template_5", "name": "verse_sub_minimal", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 1 sub minimal {{sound_class}} {{bpm}} bpm stable bass forward"},
+        {"id": "green_template_6", "name": "hook_last_word_loop", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook same phrase loop last word loop {{sound_class}} {{bpm}} bpm obsessive growth"},
+        {"id": "green_template_7", "name": "interlude_perc_carry", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} techno interlude percussion carry-over {{sound_class}} {{bpm}} bpm DJ-friendly transitions"},
+        {"id": "green_template_8", "name": "verse_scratch_ornaments", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 2 scratch ornaments {{sound_class}} {{bpm}} bpm vinyl micro dose"},
+        {"id": "green_template_9", "name": "outro_fade_tail", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook intense outro fade tail {{sound_class}} {{bpm}} bpm no hard drop soft blend"}
+      ]
     },
-    {
-      "sound_class": "hypnotic_loop_techno",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "hypnotic loop techno, repetitive, trance-inducing",
-        "sound_tokens": ["loop", "delay", "filter", "sequence", "hats"],
-        "negative_tokens": ["abrupt", "melodic", "vocal"],
-        "structure_hint": "evolving loop, gradual shift",
-        "lyric_hint": "none"
-      }
+    "cream": {
+      "tone": "warm intimate minimal",
+      "vocal_style": "smooth close delivery",
+      "mix_target": "clean bright high-end",
+      "energy": "sensual closeness",
+      "notes": null,
+      "kits": [
+        {"id": "cream_kit_1", "name": "warm_shine", "notes": null, "sound_class": "high_shine_peak", "arrangement": "bright_lead", "mix_target": "clean bright high-end", "energy_band": "high"},
+        {"id": "cream_kit_2", "name": "intimate_space", "notes": null, "sound_class": "high_shine_peak", "arrangement": "minimal_wide", "mix_target": "clean bright high-end", "energy_band": "mid"},
+        {"id": "cream_kit_3", "name": "close_peak", "notes": null, "sound_class": "high_shine_peak", "arrangement": "build_drop", "mix_target": "clean bright high-end", "energy_band": "high"},
+        {"id": "cream_kit_4", "name": "blend_drive", "notes": null, "sound_class": "warm_groove", "arrangement": "blend_drive", "mix_target": "intimate low-mids", "energy_band": "mid"},
+        {"id": "cream_kit_5", "name": "percussion_carry", "notes": null, "sound_class": "soulful_tech", "arrangement": "percussion_carry", "mix_target": "clean bright high-end", "energy_band": "mid"},
+        {"id": "cream_kit_6", "name": "reverb_bridge", "notes": null, "sound_class": "intimate_low_mids", "arrangement": "reverb_bridge", "mix_target": "soulful tech intimate", "energy_band": "low-mid"},
+        {"id": "cream_kit_7", "name": "vinyl_ornament", "notes": null, "sound_class": "high_shine_peak", "arrangement": "vinyl_ornament", "mix_target": "intimate low-mids", "energy_band": "mid"},
+        {"id": "cream_kit_8", "name": "sub_minimal_verse", "notes": null, "sound_class": "warm_groove", "arrangement": "sub_minimal_verse", "mix_target": "clean bright high-end", "energy_band": "low-mid"},
+        {"id": "cream_kit_9", "name": "hook_riser_soft", "notes": null, "sound_class": "soulful_tech", "arrangement": "hook_riser_soft", "mix_target": "intimate low-mids", "energy_band": "high"}
+      ],
+      "flows": [
+        {"id": "cream_flow_1", "name": "smooth_close", "notes": null, "delivery": "smooth", "cadence": "intimate", "rhyme_density": "high", "adlibs_policy": "warm"},
+        {"id": "cream_flow_2", "name": "sincere_phrase", "notes": null, "delivery": "sincere", "cadence": "conversational", "rhyme_density": "medium", "adlibs_policy": "soft"},
+        {"id": "cream_flow_3", "name": "closeness_lock", "notes": null, "delivery": "close", "cadence": "smooth", "rhyme_density": "high", "adlibs_policy": "minimal"},
+        {"id": "cream_flow_4", "name": "loop_hook_last_word", "notes": null, "delivery": "echo", "cadence": "hook_repeat", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "cream_flow_5", "name": "mono_phrase_hook", "notes": null, "delivery": "smooth", "cadence": "same_phrase", "rhyme_density": "medium", "adlibs_policy": "warm"},
+        {"id": "cream_flow_6", "name": "scratch_call_response", "notes": null, "delivery": "scratch_cuts", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "cream_flow_7", "name": "tight_verse_open_vowels", "notes": null, "delivery": "tight", "cadence": "open_vowels", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "cream_flow_8", "name": "half_time_release", "notes": null, "delivery": "half_time", "cadence": "release", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "cream_flow_9", "name": "adlib_minimal", "notes": null, "delivery": "clean", "cadence": "minimal", "rhyme_density": "medium", "adlibs_policy": "minimal"}
+      ],
+      "templates": [
+        {"id": "cream_template_1", "name": "intimate_heat_core", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm warm intimate minimal"},
+        {"id": "cream_template_2", "name": "high_shine_skeleton", "notes": null, "prompt_skeleton": "{{sound_class}} {{emotion}} {{color}} at {{bpm}} bpm clean bright high-end"},
+        {"id": "cream_template_3", "name": "sensual_skeleton", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{bpm}} bpm {{sound_class}} sensual closeness"},
+        {"id": "cream_template_4", "name": "techno_intro_dj", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm techno intro DJ-mix intimate no hard drop soft blend"},
+        {"id": "cream_template_5", "name": "verse_sub_minimal", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 1 sub minimal {{sound_class}} {{bpm}} bpm clean bright high-end"},
+        {"id": "cream_template_6", "name": "hook_last_word_loop", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook same phrase loop last word loop {{sound_class}} {{bpm}} bpm warm intimate"},
+        {"id": "cream_template_7", "name": "interlude_perc_carry", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} techno interlude percussion carry-over {{sound_class}} {{bpm}} bpm DJ-friendly transitions"},
+        {"id": "cream_template_8", "name": "verse_scratch_ornaments", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 2 scratch ornaments {{sound_class}} {{bpm}} bpm vinyl micro dose"},
+        {"id": "cream_template_9", "name": "outro_fade_tail", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook intense outro fade tail {{sound_class}} {{bpm}} bpm no hard drop soft blend"}
+      ]
     },
-    {
-      "sound_class": "high_shine_peak",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "high shine peak techno, bright, peak-time",
-        "sound_tokens": ["bright", "lead", "crash", "build", "release"],
-        "negative_tokens": ["dark", "muffled", "low-end"],
-        "structure_hint": "build to peak, clear drop",
-        "lyric_hint": "none"
-      }
-    },
-    {
-      "sound_class": "saturated_overload",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "saturated overload techno, clipping, dense",
-        "sound_tokens": ["saturation", "compression", "layers", "drive"],
-        "negative_tokens": ["clean", "dynamic", "sparse"],
-        "structure_hint": "wall of sound, sustained intensity",
-        "lyric_hint": "none"
-      }
-    },
-    {
-      "sound_class": "dark_hypnotic_modular",
-      "best_bpm": null,
-      "prompt_pack": {
-        "style_core": "dark hypnotic modular techno, eurorack, analog",
-        "sound_tokens": ["modular", "sequence", "filter", "sub", "atmosphere"],
-        "negative_tokens": ["digital", "bright", "vocal"],
-        "structure_hint": "modular drift, slow morph",
-        "lyric_hint": "none"
-      }
+    "black": {
+      "tone": "minimal divine smoke dominance",
+      "vocal_style": "slow authoritative sparse",
+      "mix_target": "heavy low-mid dark",
+      "energy": "singular cold power",
+      "notes": null,
+      "kits": [
+        {"id": "black_kit_1", "name": "divine_distortion", "notes": null, "sound_class": "distorted_hard_techno", "arrangement": "heavy_kick", "mix_target": "heavy low-mid dark", "energy_band": "low-mid"},
+        {"id": "black_kit_2", "name": "smoke_layers", "notes": null, "sound_class": "distorted_hard_techno", "arrangement": "wall", "mix_target": "heavy low-mid dark", "energy_band": "mid"},
+        {"id": "black_kit_3", "name": "dominance_peak", "notes": null, "sound_class": "distorted_hard_techno", "arrangement": "relentless", "mix_target": "heavy low-mid dark", "energy_band": "high"},
+        {"id": "black_kit_4", "name": "blend_drive", "notes": null, "sound_class": "dark_peak", "arrangement": "blend_drive", "mix_target": "smoke bass", "energy_band": "mid"},
+        {"id": "black_kit_5", "name": "percussion_carry", "notes": null, "sound_class": "minimal_dominant", "arrangement": "percussion_carry", "mix_target": "heavy low-mid dark", "energy_band": "mid"},
+        {"id": "black_kit_6", "name": "reverb_bridge", "notes": null, "sound_class": "smoke_bass", "arrangement": "reverb_bridge", "mix_target": "minimal dominant smoke", "energy_band": "low-mid"},
+        {"id": "black_kit_7", "name": "vinyl_ornament", "notes": null, "sound_class": "distorted_hard_techno", "arrangement": "vinyl_ornament", "mix_target": "smoke bass", "energy_band": "mid"},
+        {"id": "black_kit_8", "name": "sub_minimal_verse", "notes": null, "sound_class": "dark_peak", "arrangement": "sub_minimal_verse", "mix_target": "heavy low-mid dark", "energy_band": "low-mid"},
+        {"id": "black_kit_9", "name": "hook_riser_soft", "notes": null, "sound_class": "minimal_dominant", "arrangement": "hook_riser_soft", "mix_target": "smoke bass", "energy_band": "high"}
+      ],
+      "flows": [
+        {"id": "black_flow_1", "name": "authoritative_sparse", "notes": null, "delivery": "authoritative", "cadence": "sparse", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "black_flow_2", "name": "divine_slow", "notes": null, "delivery": "slow", "cadence": "minimal", "rhyme_density": "low", "adlibs_policy": "rare"},
+        {"id": "black_flow_3", "name": "dominance_few", "notes": null, "delivery": "dominant", "cadence": "few_words", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "black_flow_4", "name": "loop_hook_last_word", "notes": null, "delivery": "echo", "cadence": "hook_repeat", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "black_flow_5", "name": "mono_phrase_hook", "notes": null, "delivery": "authoritative", "cadence": "same_phrase", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "black_flow_6", "name": "scratch_call_response", "notes": null, "delivery": "scratch_cuts", "cadence": "call_response", "rhyme_density": "low", "adlibs_policy": "minimal"},
+        {"id": "black_flow_7", "name": "tight_verse_open_vowels", "notes": null, "delivery": "tight", "cadence": "open_vowels", "rhyme_density": "medium", "adlibs_policy": "none"},
+        {"id": "black_flow_8", "name": "half_time_release", "notes": null, "delivery": "half_time", "cadence": "release", "rhyme_density": "low", "adlibs_policy": "none"},
+        {"id": "black_flow_9", "name": "adlib_minimal", "notes": null, "delivery": "clean", "cadence": "minimal", "rhyme_density": "medium", "adlibs_policy": "minimal"}
+      ],
+      "templates": [
+        {"id": "black_template_1", "name": "divine_smoke_core", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm minimal divine smoke dominance"},
+        {"id": "black_template_2", "name": "heavy_dark_skeleton", "notes": null, "prompt_skeleton": "{{sound_class}} {{emotion}} {{color}} {{bpm}} bpm heavy low-mid dark"},
+        {"id": "black_template_3", "name": "singular_power_skeleton", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{bpm}} bpm {{sound_class}} singular cold power"},
+        {"id": "black_template_4", "name": "techno_intro_dj", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} {{sound_class}} {{bpm}} bpm techno intro DJ-mix divine smoke no hard drop soft blend"},
+        {"id": "black_template_5", "name": "verse_sub_minimal", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 1 sub minimal {{sound_class}} {{bpm}} bpm heavy low-mid dark"},
+        {"id": "black_template_6", "name": "hook_last_word_loop", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook same phrase loop last word loop {{sound_class}} {{bpm}} bpm minimal lyric variation"},
+        {"id": "black_template_7", "name": "interlude_perc_carry", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} techno interlude percussion carry-over {{sound_class}} {{bpm}} bpm DJ-friendly transitions"},
+        {"id": "black_template_8", "name": "verse_scratch_ornaments", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} verse 2 scratch ornaments {{sound_class}} {{bpm}} bpm vinyl micro dose"},
+        {"id": "black_template_9", "name": "outro_fade_tail", "notes": null, "prompt_skeleton": "{{color}} {{emotion}} hook intense outro fade tail {{sound_class}} {{bpm}} bpm no hard drop soft blend"}
+      ]
     }
+  },
+  "items": [
+    {"sound_class": "cold_industrial", "best_bpm": null, "prompt_pack": {"style_core": "cold industrial techno, metallic, factory, precise", "sound_tokens": ["metal", "reverb", "stabs", "percussion", "synth"], "negative_tokens": ["warm", "organic", "melodic", "soft"], "structure_hint": "steady build, sparse drops", "lyric_hint": "none"}},
+    {"sound_class": "distorted_hard_techno", "best_bpm": null, "prompt_pack": {"style_core": "distorted hard techno, aggressive, raw", "sound_tokens": ["distortion", "kick", "hats", "bass", "noise"], "negative_tokens": ["clean", "polished", "ambient"], "structure_hint": "relentless drive, peak energy", "lyric_hint": "none"}},
+    {"sound_class": "heavy_minimal_groove", "best_bpm": null, "prompt_pack": {"style_core": "heavy minimal groove, weight, swing", "sound_tokens": ["groove", "kick", "clap", "bassline", "minimal"], "negative_tokens": ["busy", "melodic", "chaotic"], "structure_hint": "locked groove, subtle variation", "lyric_hint": "none"}},
+    {"sound_class": "hypnotic_loop_techno", "best_bpm": null, "prompt_pack": {"style_core": "hypnotic loop techno, repetitive, trance-inducing", "sound_tokens": ["loop", "delay", "filter", "sequence", "hats"], "negative_tokens": ["abrupt", "melodic", "vocal"], "structure_hint": "evolving loop, gradual shift", "lyric_hint": "none"}},
+    {"sound_class": "high_shine_peak", "best_bpm": null, "prompt_pack": {"style_core": "high shine peak techno, bright, peak-time", "sound_tokens": ["bright", "lead", "crash", "build", "release"], "negative_tokens": ["dark", "muffled", "low-end"], "structure_hint": "build to peak, clear drop", "lyric_hint": "none"}},
+    {"sound_class": "saturated_overload", "best_bpm": null, "prompt_pack": {"style_core": "saturated overload techno, clipping, dense", "sound_tokens": ["saturation", "compression", "layers", "drive"], "negative_tokens": ["clean", "dynamic", "sparse"], "structure_hint": "wall of sound, sustained intensity", "lyric_hint": "none"}},
+    {"sound_class": "dark_hypnotic_modular", "best_bpm": null, "prompt_pack": {"style_core": "dark hypnotic modular techno, eurorack, analog", "sound_tokens": ["modular", "sequence", "filter", "sub", "atmosphere"], "negative_tokens": ["digital", "bright", "vocal"], "structure_hint": "modular drift, slow morph", "lyric_hint": "none"}},
+    {"sound_class": "hard_minimal", "best_bpm": null, "prompt_pack": {"style_core": "hard minimal techno, concrete, tight", "sound_tokens": ["minimal", "kick", "perc", "stabs", "metal"], "negative_tokens": ["warm", "organic", "melodic"], "structure_hint": "locked groove, sparse", "lyric_hint": "none"}},
+    {"sound_class": "metallic_perc", "best_bpm": null, "prompt_pack": {"style_core": "metallic percussion techno, industrial perc", "sound_tokens": ["metal", "percussion", "reverb", "factory", "stabs"], "negative_tokens": ["soft", "organic", "pad"], "structure_hint": "perc-driven, dry", "lyric_hint": "none"}},
+    {"sound_class": "deep_melodic", "best_bpm": null, "prompt_pack": {"style_core": "deep melodic techno, emotional, atmospheric", "sound_tokens": ["melody", "pad", "sub", "depth", "reverb"], "negative_tokens": ["harsh", "aggressive", "dry"], "structure_hint": "slow build, emotional", "lyric_hint": "none"}},
+    {"sound_class": "dub_techno", "best_bpm": null, "prompt_pack": {"style_core": "dub techno, space, delay", "sound_tokens": ["delay", "dub", "space", "echo", "sub"], "negative_tokens": ["dry", "dense", "bright"], "structure_hint": "dub space, sparse", "lyric_hint": "none"}},
+    {"sound_class": "airy_pads", "best_bpm": null, "prompt_pack": {"style_core": "airy pads techno, wide, atmospheric", "sound_tokens": ["pad", "air", "stereo", "wide", "atmosphere"], "negative_tokens": ["narrow", "dense", "harsh"], "structure_hint": "wide depth, soft", "lyric_hint": "none"}},
+    {"sound_class": "acid_hypno", "best_bpm": null, "prompt_pack": {"style_core": "acid hypnotic techno, squelch, loop", "sound_tokens": ["acid", "squelch", "loop", "filter", "bass"], "negative_tokens": ["static", "melodic", "soft"], "structure_hint": "acid loop, hypnotic", "lyric_hint": "none"}},
+    {"sound_class": "rolling_groove", "best_bpm": null, "prompt_pack": {"style_core": "rolling groove techno, drive, bass", "sound_tokens": ["roll", "groove", "bass", "drive", "hats"], "negative_tokens": ["broken", "sparse", "static"], "structure_hint": "rolling forward", "lyric_hint": "none"}},
+    {"sound_class": "saturated_bass", "best_bpm": null, "prompt_pack": {"style_core": "saturated bass techno, heavy low-end", "sound_tokens": ["saturation", "bass", "sub", "drive", "weight"], "negative_tokens": ["clean", "thin", "bright"], "structure_hint": "bass forward, dense", "lyric_hint": "none"}},
+    {"sound_class": "warm_groove", "best_bpm": null, "prompt_pack": {"style_core": "warm groove techno, soulful, intimate", "sound_tokens": ["warm", "groove", "soul", "bass", "close"], "negative_tokens": ["cold", "harsh", "distant"], "structure_hint": "warm lock, intimate", "lyric_hint": "none"}},
+    {"sound_class": "soulful_tech", "best_bpm": null, "prompt_pack": {"style_core": "soulful techno, organic, peak", "sound_tokens": ["soul", "organic", "lead", "warm", "peak"], "negative_tokens": ["cold", "industrial", "raw"], "structure_hint": "soulful build", "lyric_hint": "none"}},
+    {"sound_class": "intimate_low_mids", "best_bpm": null, "prompt_pack": {"style_core": "intimate low-mids techno, close, soft peak", "sound_tokens": ["intimate", "low-mid", "warm", "close", "soft"], "negative_tokens": ["harsh", "bright", "distant"], "structure_hint": "close, minimal", "lyric_hint": "none"}},
+    {"sound_class": "dark_peak", "best_bpm": null, "prompt_pack": {"style_core": "dark peak techno, dominant, heavy", "sound_tokens": ["dark", "peak", "heavy", "distortion", "power"], "negative_tokens": ["bright", "soft", "clean"], "structure_hint": "dark peak, relentless", "lyric_hint": "none"}},
+    {"sound_class": "minimal_dominant", "best_bpm": null, "prompt_pack": {"style_core": "minimal dominant techno, few elements, power", "sound_tokens": ["minimal", "dominant", "kick", "bass", "space"], "negative_tokens": ["busy", "melodic", "soft"], "structure_hint": "minimal dominance", "lyric_hint": "none"}},
+    {"sound_class": "smoke_bass", "best_bpm": null, "prompt_pack": {"style_core": "smoke bass techno, low-mid, dark weight", "sound_tokens": ["smoke", "bass", "dark", "low-mid", "weight"], "negative_tokens": ["bright", "thin", "clean"], "structure_hint": "smoke low-end", "lyric_hint": "none"}}
   ]
 }

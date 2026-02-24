@@ -12,6 +12,11 @@ Operational and migration log for the REST (Radical Noface Structural Engine) re
 - **Schemas:** track.schema.json and run_results.schema.json track_id enum updated to 5 colors. suggestion.schema.json added for suggestion outputs.
 - **Validation:** validate.py validates tracks, runs (manifest/results), and suggestions (python/out/suggestions/*.suggestion.json). Only active 5 track_ids are validated; legacy 7-track suggestion files are skipped with a single-line log: `skipped legacy suggestion: <path>`.
 
+## Sound library v2.2
+
+- **Variant pool expansion:** kits/flows/templates 9 per color (scratch-techno, soft-transition). Kod değişmedi; sadece havuz genişledi. Aynı seed ile seçilen index değişebilir (len N arttı) — bu "drift" değil, kontrollü evrim.
+- **Kit 4–9 identity:** Renge özgü sound_class ve mix_target; 5 kapı kimliği güçlendirildi. items[]'a yeni sound_class'lar eklendi (Grey: hard_minimal, metallic_perc; Blue: deep_melodic, dub_techno, airy_pads; Green: acid_hypno, rolling_groove, saturated_bass; Cream: warm_groove, soulful_tech, intimate_low_mids; Black: dark_peak, minimal_dominant, smoke_bass). Her biri için prompt_pack tanımlı. Davranış (blend_drive vb.) aynı, tonal dünya renge göre ayrışıyor.
+
 ## Conventions
 
 - One scope per commit. No batched unrelated edits.
