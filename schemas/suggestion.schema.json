@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rest_engine/schemas/suggestion.schema.json",
+  "title": "REST Suggestion",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["track_id", "prompt_text", "resolved"],
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "enum": ["radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"]
+    },
+    "prompt_text": {
+      "type": "string"
+    },
+    "resolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["color", "emotion_core", "sound_class", "bpm_source", "variant"],
+      "properties": {
+        "color": { "type": "string" },
+        "emotion_core": { "type": "string" },
+        "sound_class": { "type": "string" },
+        "bpm_source": { "type": "string" },
+        "variant": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["template_id", "flow_id", "kit_id", "template_index", "flow_index", "kit_index", "seed_hash_hex"],
+          "properties": {
+            "template_id": { "type": "string" },
+            "flow_id": { "type": "string" },
+            "kit_id": { "type": "string" },
+            "template_index": { "type": "integer" },
+            "flow_index": { "type": "integer" },
+            "kit_index": { "type": "integer" },
+            "seed_hash_hex": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
