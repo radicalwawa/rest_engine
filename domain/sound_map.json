@@ -1,49 +1,19 @@
 {
-  "version": "1.0",
-  "map_id": "track_to_soundclass_v1",
+  "version": "2.0",
+  "map_id": "track_to_color_v2",
   "primary_genre": "rap_techno",
+  "colors": [
+    {"color": "grey", "emotion_core": "concrete_rage", "notes": null},
+    {"color": "blue", "emotion_core": "blue_sorrow", "notes": null},
+    {"color": "green", "emotion_core": "saturated_growth", "notes": null},
+    {"color": "cream", "emotion_core": "intimate_heat", "notes": null},
+    {"color": "black", "emotion_core": "divine_smoke", "notes": null}
+  ],
   "mappings": [
-    {
-      "track_id": "radical.luxr",
-      "sound_class": "high_shine_peak",
-      "emotion_profile": "luxury_shine",
-      "notes": null
-    },
-    {
-      "track_id": "radical.pride",
-      "sound_class": "cold_industrial",
-      "emotion_profile": "dominant_control",
-      "notes": null
-    },
-    {
-      "track_id": "radical.wrath",
-      "sound_class": "distorted_hard_techno",
-      "emotion_profile": "anger_pressure",
-      "notes": null
-    },
-    {
-      "track_id": "radical.sloth",
-      "sound_class": "heavy_minimal_groove",
-      "emotion_profile": "heavy_low_energy",
-      "notes": null
-    },
-    {
-      "track_id": "radical.greed",
-      "sound_class": "hypnotic_loop_techno",
-      "emotion_profile": "obsessive_repetition",
-      "notes": null
-    },
-    {
-      "track_id": "radical.glutt",
-      "sound_class": "saturated_overload",
-      "emotion_profile": "overconsumption_overload",
-      "notes": null
-    },
-    {
-      "track_id": "radical.envy",
-      "sound_class": "dark_hypnotic_modular",
-      "emotion_profile": "tense_paranoia",
-      "notes": null
-    }
+    {"track_id": "radical.grey", "color": "grey", "sound_class": "cold_industrial", "notes": null},
+    {"track_id": "radical.blue", "color": "blue", "sound_class": "dark_hypnotic_modular", "notes": null},
+    {"track_id": "radical.green", "color": "green", "sound_class": "hypnotic_loop_techno", "notes": null},
+    {"track_id": "radical.cream", "color": "cream", "sound_class": "high_shine_peak", "notes": null},
+    {"track_id": "radical.black", "color": "black", "sound_class": "distorted_hard_techno", "notes": null}
   ]
 }

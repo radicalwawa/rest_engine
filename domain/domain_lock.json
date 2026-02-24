@@ -1,4 +1,10 @@
 {
+  "domain_model": "5_color_consciousness",
+  "active_colors": ["grey", "blue", "green", "cream", "black"],
+  "deprecated_model": "7_deadly_sins",
+  "deprecated_tracks": ["radical.sloth", "radical.glutt"],
+  "narrative_tagline": "metropolis_consciousness",
+  "notes": null,
   "domain_id": "techno_rap_fusion",
   "version": "0.1",
   "genre_bias": "techno_dominant",
