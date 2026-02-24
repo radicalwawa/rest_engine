@@ -67,6 +67,7 @@ def main():
         for p in sorted(SUGGESTIONS_DIR.glob("*.suggestion.json")):
             track_id = p.stem.removesuffix(".suggestion") if p.suffix == ".json" else p.stem
             if track_id not in SUGGESTION_TRACK_IDS:
+                print(f"skipped legacy suggestion: {p.relative_to(REPO_ROOT)}", file=sys.stderr)
                 continue
             try:
                 data = load_json(p)
