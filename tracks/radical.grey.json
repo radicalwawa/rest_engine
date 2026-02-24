@@ -1,0 +1,24 @@
+{
+  "id": "radical.grey",
+  "version": "0.1",
+  "theme": "metropolis concrete rage, brutal discipline",
+  "energy_profile": "high",
+  "emotional_tone": "controlled aggression",
+  "lyrical_focus": "discipline, order, concrete",
+  "keyword_vector": ["metropolis", "concrete", "rage", "discipline", "brutal"],
+  "techno_profile": {
+    "drive_level": "high",
+    "bass_weight": "heavy",
+    "texture_type": "industrial",
+    "spatial_depth": "tight"
+  },
+  "constraints": {
+    "bpm_override": null,
+    "structure_override": null
+  },
+  "calibration": {
+    "tested_bpms": [],
+    "proven_bpm": null,
+    "drift_notes": []
+  }
+}

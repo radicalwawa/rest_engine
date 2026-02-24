@@ -1,0 +1,24 @@
+{
+  "id": "radical.blue",
+  "version": "0.1",
+  "theme": "mother tears, emotional sorrow, internal tension",
+  "energy_profile": "medium",
+  "emotional_tone": "tense, introspective",
+  "lyrical_focus": "loss, longing, tension",
+  "keyword_vector": ["mother", "tears", "sorrow", "tension", "internal"],
+  "techno_profile": {
+    "drive_level": "medium",
+    "bass_weight": "deep",
+    "texture_type": "modular",
+    "spatial_depth": "wide"
+  },
+  "constraints": {
+    "bpm_override": null,
+    "structure_override": null
+  },
+  "calibration": {
+    "tested_bpms": [],
+    "proven_bpm": null,
+    "drift_notes": []
+  }
+}

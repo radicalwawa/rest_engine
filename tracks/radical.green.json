@@ -1,0 +1,24 @@
+{
+  "id": "radical.green",
+  "version": "0.1",
+  "theme": "dollar and mary, saturated growth, obsessive expansion",
+  "energy_profile": "high",
+  "emotional_tone": "driven, repetitive",
+  "lyrical_focus": "growth, expansion, obsession",
+  "keyword_vector": ["growth", "saturated", "expansion", "obsessive", "loop"],
+  "techno_profile": {
+    "drive_level": "high",
+    "bass_weight": "punchy",
+    "texture_type": "hypnotic",
+    "spatial_depth": "layered"
+  },
+  "constraints": {
+    "bpm_override": null,
+    "structure_override": null
+  },
+  "calibration": {
+    "tested_bpms": [],
+    "proven_bpm": null,
+    "drift_notes": []
+  }
+}

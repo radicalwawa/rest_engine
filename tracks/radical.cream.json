@@ -1,0 +1,24 @@
+{
+  "id": "radical.cream",
+  "version": "0.1",
+  "theme": "intimacy, sincerity, warm closeness",
+  "energy_profile": "medium-high",
+  "emotional_tone": "warm, sincere",
+  "lyrical_focus": "closeness, desire, sincerity",
+  "keyword_vector": ["intimacy", "warm", "sincere", "closeness", "sensual"],
+  "techno_profile": {
+    "drive_level": "medium",
+    "bass_weight": "warm",
+    "texture_type": "bright",
+    "spatial_depth": "intimate"
+  },
+  "constraints": {
+    "bpm_override": null,
+    "structure_override": null
+  },
+  "calibration": {
+    "tested_bpms": [],
+    "proven_bpm": null,
+    "drift_notes": []
+  }
+}

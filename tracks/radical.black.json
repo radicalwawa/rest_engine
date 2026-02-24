@@ -1,0 +1,24 @@
+{
+  "id": "radical.black",
+  "version": "0.1",
+  "theme": "divine smoke, ego, singular cold dominance",
+  "energy_profile": "peak",
+  "emotional_tone": "cold, dominant",
+  "lyrical_focus": "ego, singularity, dominance",
+  "keyword_vector": ["divine", "smoke", "ego", "dominance", "singular"],
+  "techno_profile": {
+    "drive_level": "max",
+    "bass_weight": "dominant",
+    "texture_type": "distorted",
+    "spatial_depth": "foreground"
+  },
+  "constraints": {
+    "bpm_override": null,
+    "structure_override": null
+  },
+  "calibration": {
+    "tested_bpms": [],
+    "proven_bpm": null,
+    "drift_notes": []
+  }
+}
