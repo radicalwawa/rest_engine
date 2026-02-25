@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "phase": "album5_preproduction_complete",
+  "status": "frozen",
+  "frozen_at": null,
+  "notes": "Album 5 preproduction system locked before first Suno acapella test.",
+  "components": {
+    "album_identities_manifest": "domain/album5_identities.json",
+    "works_manifest": "domain/works_manifest.json",
+    "score_schema": "domain/score_schema.json",
+    "revision_rules": "domain/revision_rules.json",
+    "acapella_protocol": "domain/acapella_protocol.json",
+    "suno_prompt_format": "domain/suno_prompt_format.json"
+  },
+  "python_components": {
+    "suno_export": "python/suno_export.py",
+    "terminal_ui": "python/ui.py"
+  },
+  "engine_state": {
+    "deterministic": true,
+    "state_mixing_forbidden": true,
+    "null_instead_of_omission": true,
+    "single_scope_commit_policy": true
+  },
+  "ready_for": [
+    "grey_first_suno_iteration",
+    "scored_revision_loop",
+    "club_level_refinement_pipeline"
+  ]
+}
