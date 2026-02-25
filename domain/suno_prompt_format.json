@@ -1,7 +1,1 @@
-{
-  "format": "multiline",
-  "sections": ["TITLE", "BPM_FEEL", "PROD_DNA", "VOCAL_DNA", "CONSTRAINTS"],
-  "include_avoid_list": true,
-  "include_focus_list": true,
-  "notes": null
-}
+{"format":"multiline","sections":["TITLE","BPM_FEEL","PROD_DNA","VOCAL_DNA","CONSTRAINTS"],"prod_dna_key_order":["drum_language","bass_language","harmony_policy","ambience_policy","fx_policy","energy_curve"],"include_avoid_list":true,"include_focus_list":true,"notes":null}

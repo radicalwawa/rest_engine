@@ -51,6 +51,10 @@ def _build_color_emotion_lookup(sound_map: Dict[str, Any]) -> Dict[str, str]:
     return lookup
 
 
+# Canonical order for prompt hash. State (track_id) -> sound_class via domain/sound_map.json mappings.
+HASH_PAYLOAD_ORDER = ("prompt_text", "bpm_override", "sound_class", "color", "emotion_core")
+
+
 def _variant_from_seed(
     prompt_text: str,
     bpm_override: int,

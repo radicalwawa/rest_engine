@@ -13,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = REPO_ROOT / "domain"
 TRACKS = REPO_ROOT / "tracks"
 OUT_DIR = Path(__file__).resolve().parent / "out" / "suno"
+SUNO_FORMAT_PATH = DOMAIN / "suno_prompt_format.json"
 
 
 def load_json(path: Path):
@@ -76,17 +77,21 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_path = OUT_DIR / f"{track_id}__{variation}__suno_prompt.txt"
 
+    fmt = load_json(SUNO_FORMAT_PATH) if SUNO_FORMAT_PATH.exists() else {}
+    prod_key_order = fmt.get("prod_dna_key_order") or [
+        "drum_language", "bass_language", "harmony_policy", "ambience_policy", "fx_policy", "energy_curve"
+    ]
     title = f"{identity['track_id']} — {identity['state_label']}"
     bpm_feel = f"{identity['bpm_min']}–{identity['bpm_max']} BPM feel"
 
-    prod_parts = [
-        f"drum: {identity.get('drum_language', '')}",
-        f"bass: {identity.get('bass_language', '')}",
-        f"harmony: {identity.get('harmony_policy', '')}",
-        f"ambience: {identity.get('ambience_policy', '')}",
-        f"fx: {format_fx_policy(identity.get('fx_policy') or {})}",
-        f"energy_curve: {identity.get('energy_curve', '')}",
-    ]
+    key_to_label = {"drum_language": "drum", "bass_language": "bass", "harmony_policy": "harmony", "ambience_policy": "ambience", "energy_curve": "energy_curve"}
+    prod_parts = []
+    for key in prod_key_order:
+        if key == "fx_policy":
+            prod_parts.append(f"fx: {format_fx_policy(identity.get('fx_policy') or {})}")
+        else:
+            label = key_to_label.get(key, key)
+            prod_parts.append(f"{label}: {identity.get(key, '')}")
     prod_dna = "\n".join(prod_parts)
 
     vocal_dna = build_vocal_dna(identity.get("vocal_delivery") or {})
