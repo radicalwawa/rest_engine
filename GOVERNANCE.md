@@ -17,3 +17,5 @@
 **Validation:** Before any modification run `python python/validate.py`. If FAIL: list violations; do not fix unless explicitly instructed.
 
 **Active tracks:** Exactly 5. Defined in `schemas/track.schema.json` enum. `tracks/` holds only those; deprecated material in `tracks_deprecated/` only.
+
+**Schema breaking change policy:** Changes to `schemas/*.json` that remove required fields, narrow enum values, or change types are breaking. Require explicit approval and version bump. Additive changes (new optional fields, new enum values) are allowed with version bump. CI runs `python python/validate.py` on push/PR; breaking changes must not land without updating all consumers and data.
