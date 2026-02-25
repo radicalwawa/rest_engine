@@ -1,5 +1,25 @@
 {
-  "score_keys": ["kick_sub", "vocal_space", "state_purity", "dj_flow", "minimalism", "energy_curve", "relisten"],
+  "version": "1.0",
+  "updated_at": null,
+  "notes": null,
+  "score_keys": [
+    "kick_sub_uyumu",
+    "vokal_alani",
+    "renk_safligi",
+    "akis_dj_uygunlugu",
+    "minimalizm_disiplini",
+    "enerji_egrisi",
+    "tekrar_dinlenebilirlik"
+  ],
+  "score_labels_tr": {
+    "kick_sub_uyumu": "Kick/Sub Uyumu",
+    "vokal_alani": "Vokal Alanı",
+    "renk_safligi": "Renk Saflığı",
+    "akis_dj_uygunlugu": "Akış & DJ Uygunluğu",
+    "minimalizm_disiplini": "Minimalizm Disiplini",
+    "enerji_egrisi": "Enerji Eğrisi",
+    "tekrar_dinlenebilirlik": "Tekrar Dinlenebilirlik"
+  },
   "scale": [0, 10],
   "total_max": 70,
   "encoding": "object"
