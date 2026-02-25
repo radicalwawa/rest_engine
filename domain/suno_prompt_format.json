@@ -1,0 +1,7 @@
+{
+  "format": "multiline",
+  "sections": ["TITLE", "BPM_FEEL", "PROD_DNA", "VOCAL_DNA", "CONSTRAINTS"],
+  "include_avoid_list": true,
+  "include_focus_list": true,
+  "notes": null
+}

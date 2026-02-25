@@ -1,0 +1,8 @@
+{
+  "sample_rate_target": 44100,
+  "bit_depth": 24,
+  "mono_or_stereo": "mono_preferred",
+  "headroom_db": -6,
+  "file_naming": "{track_id}__acapella__take{n}.wav",
+  "notes": null
+}
