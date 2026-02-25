@@ -1,0 +1,15 @@
+TITLE: radical.grey — Concrete Rage
+BPM_FEEL: 128–132 BPM feel
+PROD_DNA:
+drum: dry_punchy_mechanical
+bass: sub_threat_single_note
+harmony: none_or_minimal
+ambience: cold_sparse
+fx: reverb: low, delay: controlled, distortion: minimal_present, brightness: low, stereo_width: moderate
+energy_curve: flat_pressure_increase
+VOCAL_DNA:
+calm_ominous low register, adlibs=False
+CONSTRAINTS:
+allow_drop false
+avoid: uplifting chords, bright supersaws, hard EDM drops
+focus: industrial percussion loop, dry kick, sub pressure, space for vocal
