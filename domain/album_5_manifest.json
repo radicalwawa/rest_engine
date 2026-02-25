@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "schema_version": null,
+  "album_id": "album_5",
+  "states": [
+    {
+      "track_id": "radical.grey",
+      "bpm_range": {"min": null, "max": null},
+      "structural_energy_curve": null,
+      "suno_prompt_template_skeleton": null,
+      "allowed_instrumentation_profile": null,
+      "drop_logic": null
+    },
+    {
+      "track_id": "radical.blue",
+      "bpm_range": {"min": null, "max": null},
+      "structural_energy_curve": null,
+      "suno_prompt_template_skeleton": null,
+      "allowed_instrumentation_profile": null,
+      "drop_logic": null
+    },
+    {
+      "track_id": "radical.green",
+      "bpm_range": {"min": null, "max": null},
+      "structural_energy_curve": null,
+      "suno_prompt_template_skeleton": null,
+      "allowed_instrumentation_profile": null,
+      "drop_logic": null
+    },
+    {
+      "track_id": "radical.cream",
+      "bpm_range": {"min": null, "max": null},
+      "structural_energy_curve": null,
+      "suno_prompt_template_skeleton": null,
+      "allowed_instrumentation_profile": null,
+      "drop_logic": null
+    },
+    {
+      "track_id": "radical.black",
+      "bpm_range": {"min": null, "max": null},
+      "structural_energy_curve": null,
+      "suno_prompt_template_skeleton": null,
+      "allowed_instrumentation_profile": null,
+      "drop_logic": null
+    }
+  ]
+}
