@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # REST Engine — Phase 3 lifecycle visualization and state coloring. Scope: python/ only.
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -233,6 +234,7 @@ class RestTui(App[None]):
         Binding("c", "work_create", "Work create"),
         Binding("e", "export_prompt", "Export prompt"),
         Binding("g", "generate", "Generate"),
+        Binding("l", "link", "Link work"),
         Binding("m", "mark_generated", "Mark generated"),
         Binding("k", "mark_scored", "Mark scored"),
         Binding("B", "mark_best_status", "Mark best status"),
@@ -390,6 +392,76 @@ class RestTui(App[None]):
             )
             self._log(r.stdout or "", r.stderr or "")
             self._refresh_works_list()
+        except Exception as e:
+            self._log("", str(e))
+
+    def action_link(self) -> None:
+        try:
+            r = subprocess.run(
+                [sys.executable, str(UI_SCRIPT), "--help"],
+                capture_output=True,
+                text=True,
+                cwd=ROOT,
+                timeout=10,
+            )
+            out = (r.stdout or "") + (r.stderr or "")
+            if "work-update" not in out:
+                self._log("", "MISSING COMMAND: work-update")
+                return
+        except Exception as e:
+            self._log("", str(e))
+            return
+        if not self._selected_work:
+            self._log("", "No work selected")
+            return
+        work_id = self._selected_work.get("work_id") or ""
+        track_id = self._selected_work.get("track_id") or ""
+        if not track_id:
+            self._log("", "No track_id")
+            return
+        suggestion_path = SUGGESTIONS_DIR / f"{track_id}.suggestion.json"
+        if not suggestion_path.exists():
+            self._log("", f"suggestion file not found: {suggestion_path}")
+            return
+        with open(suggestion_path, encoding="utf-8") as f:
+            suggestion_data = json.load(f)
+        suggestion_hash = suggestion_data.get("suggestion_hash")
+        if suggestion_hash is None or suggestion_hash == "":
+            suggestion_hash = hashlib.sha256(
+                json.dumps(suggestion_data, sort_keys=True, ensure_ascii=False).encode()
+            ).hexdigest()
+        resolved = suggestion_data.get("resolved") or {}
+        variant = resolved.get("variant") or {}
+        seed_hash_hex = variant.get("seed_hash_hex") or ""
+        if not seed_hash_hex:
+            self._log("", "seed_hash_hex not found in suggestion")
+            return
+        export_path = SUNO_OUT_DIR / f"{track_id}__v0__suno_prompt.txt"
+        if not export_path.exists():
+            self._log("", f"export_path not found: {export_path}")
+            return
+        export_path_str = str(export_path.relative_to(ROOT))
+        try:
+            r = subprocess.run(
+                [
+                    sys.executable,
+                    str(UI_SCRIPT),
+                    "work-update",
+                    "--work_id", work_id,
+                    "--prompt_version", "v0",
+                    "--status", "prompt_generated",
+                    "--suggestion_hash", suggestion_hash,
+                    "--seed_hash_hex", seed_hash_hex,
+                    "--export_path", export_path_str,
+                ],
+                capture_output=True,
+                text=True,
+                cwd=ROOT,
+                timeout=30,
+            )
+            self._log(r.stdout or "", r.stderr or "")
+            if r.returncode == 0:
+                self._refresh_works_list()
         except Exception as e:
             self._log("", str(e))
 
