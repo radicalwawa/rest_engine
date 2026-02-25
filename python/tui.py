@@ -174,6 +174,10 @@ class RestTui(App[None]):
         Binding("q", "quit", "Quit"),
         Binding("c", "work_create", "Work create"),
         Binding("e", "export_prompt", "Export prompt"),
+        Binding("g", "generate", "Generate"),
+        Binding("m", "mark_generated", "Mark generated"),
+        Binding("k", "mark_scored", "Mark scored"),
+        Binding("B", "mark_best_status", "Mark best status"),
         Binding("s", "show_suggestion", "Suggestion JSON"),
         Binding("b", "mark_best", "Mark best"),
         Binding("r", "validate", "Validate"),
@@ -303,6 +307,69 @@ class RestTui(App[None]):
             self._refresh_works_list()
         except Exception as e:
             self._log("", str(e))
+
+    def action_generate(self) -> None:
+        if not self._selected_work:
+            self._log("", "No work selected")
+            return
+        work_id = self._selected_work.get("work_id") or ""
+        track_id = self._selected_work.get("track_id") or ""
+        if not track_id:
+            self._log("", "No track_id")
+            return
+        try:
+            r = subprocess.run(
+                [
+                    sys.executable,
+                    str(SUNO_EXPORT_SCRIPT),
+                    "--track_id", track_id,
+                    "--variation", "v0",
+                ],
+                capture_output=True,
+                text=True,
+                cwd=ROOT,
+                timeout=30,
+            )
+            self._log(r.stdout or "", r.stderr or "")
+            self._refresh_works_list()
+        except Exception as e:
+            self._log("", str(e))
+
+    def _run_work_update(self, status: str) -> None:
+        if not self._selected_work:
+            self._log("", "No work selected")
+            return
+        work_id = self._selected_work.get("work_id") or ""
+        if not work_id:
+            self._log("", "No work_id")
+            return
+        try:
+            r = subprocess.run(
+                [
+                    sys.executable,
+                    str(UI_SCRIPT),
+                    "work-update",
+                    "--work_id", work_id,
+                    "--status", status,
+                ],
+                capture_output=True,
+                text=True,
+                cwd=ROOT,
+                timeout=30,
+            )
+            self._log(r.stdout or "", r.stderr or "")
+            self._refresh_works_list()
+        except Exception as e:
+            self._log("", str(e))
+
+    def action_mark_generated(self) -> None:
+        self._run_work_update("generated")
+
+    def action_mark_scored(self) -> None:
+        self._run_work_update("scored")
+
+    def action_mark_best_status(self) -> None:
+        self._run_work_update("best")
 
     def action_show_suggestion(self) -> None:
         if not self._selected_work or self._detail is None:
