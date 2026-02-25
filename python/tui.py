@@ -133,6 +133,43 @@ class WorkDetail(Static):
         x = w.get(k)
         return "null" if x is None else str(x)
 
+    def _structural_check(self, w: dict) -> tuple[list[str], bool]:
+        lines = []
+        ok = True
+        track_id = w.get("track_id") or ""
+        status = w.get("status")
+        status_ge_prompt = status in ("prompt_generated", "generated", "scored", "best")
+        if w.get("suggestion_hash") is not None and w.get("suggestion_hash") != "":
+            lines.append("suggestion_hash ✔")
+        else:
+            lines.append("suggestion_hash ❌")
+            ok = False
+        if w.get("seed_hash_hex") is not None and w.get("seed_hash_hex") != "":
+            lines.append("seed_hash_hex ✔")
+        else:
+            lines.append("seed_hash_hex ❌")
+            ok = False
+        if w.get("prompt_version") is not None and w.get("prompt_version") != "":
+            lines.append("prompt_version ✔")
+        else:
+            lines.append("prompt_version ❌")
+            ok = False
+        if status_ge_prompt:
+            if w.get("export_path") is not None and w.get("export_path") != "":
+                lines.append("export_path ✔")
+            else:
+                lines.append("export_path ❌")
+                ok = False
+        else:
+            lines.append("export_path (n/a)")
+        suggestion_path = SUGGESTIONS_DIR / f"{track_id}.suggestion.json"
+        if suggestion_path.exists():
+            lines.append("suggestion file ✔")
+        else:
+            lines.append("suggestion file ❌")
+            ok = False
+        return lines, ok
+
     def _refresh(self) -> None:
         if self._work is None:
             self.update("(no work selected)")
@@ -155,6 +192,12 @@ class WorkDetail(Static):
             f"status: {self._v(w, 'status')}",
             f"export_path: {export_path}",
         ])
+        check_lines, all_ok = self._structural_check(w)
+        lines.append("")
+        lines.append("STRUCTURAL CHECK")
+        lines.extend(check_lines)
+        if all_ok:
+            lines.append("✔ STRUCTURE OK")
         self.update("\n".join(lines))
 
     def on_mount(self) -> None:
