@@ -1,6 +1,25 @@
 {
   "version": "1.0",
-  "updated_at": null,
+  "updated_at": "2026-02-25T11:24:06Z",
   "notes": null,
-  "works": []
+  "works": [
+    {
+      "work_id": "work_d118ef418b53b53c",
+      "track_id": "radical.grey",
+      "series": "radical.wrath",
+      "title": "Test Track",
+      "volume": "vol.test",
+      "created_at": "2026-02-25T01:15:37Z",
+      "notes": null
+    },
+    {
+      "work_id": "work_bf845148956f1861",
+      "track_id": "radical.grey",
+      "series": "album_5",
+      "title": "grey_v0_iteration",
+      "volume": "1",
+      "created_at": "2026-02-25T11:24:06Z",
+      "notes": null
+    }
+  ]
 }
