@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "updated_at": null,
+  "notes": null,
+  "applies_to": "album5_identities+suno_prompt_format",
+  "score_total_max": 70,
+  "keys_order": [
+    "kick_sub_uyumu",
+    "vokal_alani",
+    "renk_safligi",
+    "akis_dj_uygunlugu",
+    "minimalizm_disiplini",
+    "enerji_egrisi",
+    "tekrar_dinlenebilirlik"
+  ],
+  "thresholds": {
+    "kick_sub_uyumu": 7,
+    "vokal_alani": 7,
+    "renk_safligi": 8,
+    "akis_dj_uygunlugu": 7,
+    "minimalizm_disiplini": 6,
+    "enerji_egrisi": 7,
+    "tekrar_dinlenebilirlik": 7
+  },
+  "actions": [
+    {
+      "key": "kick_sub_uyumu",
+      "when_below": 7,
+      "prompt_append_tr": "Düşük frekansları kulüp güvenli yap: sub baskısı güçlü ama taşmasın; kick net ve kısa; low-end temiz, bulanık olmasın.",
+      "tighten": {
+        "mix_targets.kick_sub_relationship": "club_safe",
+        "mix_targets.transients": "tight"
+      },
+      "loosen": null
+    },
+    {
+      "key": "vokal_alani",
+      "when_below": 7,
+      "prompt_append_tr": "Vokale daha fazla boşluk bırak: element sayısını azalt; orta frekansta çakışma olmasın; vokal önde kalsın.",
+      "tighten": {
+        "suno_prompt_guidelines.focus_add": ["space for vocal", "fewer elements"],
+        "suno_prompt_guidelines.avoid_add": ["busy mids", "dense arrangement"]
+      },
+      "loosen": null
+    },
+    {
+      "key": "renk_safligi",
+      "when_below": 8,
+      "prompt_append_tr": "Renk safliğini artır: bu state dışına kayma; genre_stack'e sadık kal; 'avoid' listesini kesin uygula; pop/EDM hissi verme.",
+      "tighten": {
+        "suno_prompt_guidelines.enforce_avoid": true
+      },
+      "loosen": null
+    },
+    {
+      "key": "akis_dj_uygunlugu",
+      "when_below": 7,
+      "prompt_append_tr": "DJ akışını güçlendir: drop olmasın; loop sürekliliği olsun; sert geçiş yok; baskı kademeli artsın.",
+      "tighten": {
+        "suno_prompt_guidelines.allow_drop": false
+      },
+      "loosen": null
+    },
+    {
+      "key": "minimalizm_disiplini",
+      "when_below": 6,
+      "prompt_append_tr": "Daha minimal ol: daha az element; tek omurga loop; gereksiz melodik süsleme yok; sade ama ağır.",
+      "tighten": {
+        "suno_prompt_guidelines.focus_add": ["minimal elements", "single backbone loop"],
+        "suno_prompt_guidelines.avoid_add": ["extra melodies", "too many layers"]
+      },
+      "loosen": null
+    },
+    {
+      "key": "enerji_egrisi",
+      "when_below": 7,
+      "prompt_append_tr": "Enerji eğrisini düzelt: monoton olmasın ama drop da olmasın; küçük katman eklemeleriyle baskı artışı yarat.",
+      "tighten": {
+        "energy_curve_hint": "small_layered_pressure_ramp"
+      },
+      "loosen": null
+    },
+    {
+      "key": "tekrar_dinlenebilirlik",
+      "when_below": 7,
+      "prompt_append_tr": "Tekrar dinlenebilirliği artır: daha az yoran üst frekans; daha temiz yapı; hook/loop daha net, rahatsız edici değil.",
+      "tighten": {
+        "fx_policy.brightness": "low_to_moderate",
+        "suno_prompt_guidelines.avoid_add": ["harsh highs", "fatiguing top end"]
+      },
+      "loosen": null
+    }
+  ],
+  "selection_policy": {
+    "max_actions_per_revision": 2,
+    "priority": ["renk_safligi", "kick_sub_uyumu", "vokal_alani", "akis_dj_uygunlugu", "minimalizm_disiplini", "enerji_egrisi", "tekrar_dinlenebilirlik"],
+    "notes": "Her revizyonda sadece en düşük 1-2 parametre hedeflenir; prompt minimal değişir; drift engellenir."
+  }
+}
