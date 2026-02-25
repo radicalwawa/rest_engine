@@ -1,0 +1,11 @@
+/* Phase 3: status-based color mapping (UI only) */
+.status-grey { color: #808080; }
+.status-yellow { color: #b8860b; }
+.status-blue { color: #4682b4; }
+.status-magenta { color: #b03060; }
+.status-green { color: #228b22; }
+
+#log-container {
+    height: 8;
+    overflow-y: auto;
+}

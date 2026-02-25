@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# REST Engine — Phase 2 action layer. Scope: python/ only.
+# REST Engine — Phase 3 lifecycle visualization and state coloring. Scope: python/ only.
 
 import json
 import subprocess
@@ -8,7 +8,7 @@ from pathlib import Path
 
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, Vertical
+from textual.containers import Horizontal, ScrollableContainer, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Button, Footer, Header, Input, ListItem, ListView, Static
 
@@ -19,6 +19,16 @@ VALIDATE_SCRIPT = ROOT / "python" / "validate.py"
 UI_SCRIPT = ROOT / "python" / "ui.py"
 SUNO_EXPORT_SCRIPT = ROOT / "python" / "suno_export.py"
 SUGGESTIONS_DIR = ROOT / "python" / "out" / "suggestions"
+SUNO_OUT_DIR = ROOT / "python" / "out" / "suno"
+
+STATUS_CLASS = {
+    None: "status-grey",
+    "null": "status-grey",
+    "prompt_generated": "status-yellow",
+    "generated": "status-blue",
+    "scored": "status-magenta",
+    "best": "status-green",
+}
 
 
 def _read_works_manifest() -> list:
@@ -29,9 +39,16 @@ def _read_works_manifest() -> list:
     return data.get("works") or []
 
 
+def _status_class(work: dict) -> str:
+    s = work.get("status")
+    if s is None:
+        return STATUS_CLASS.get(None, "status-grey")
+    return STATUS_CLASS.get(s, "status-grey")
+
+
 class LogPanel(Static):
     BORDER_TITLE = "Log"
-    _MAX_LINES = 50
+    _MAX_LINES = 100
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -55,11 +72,31 @@ class WorkList(ListView):
         for w in self._works:
             work_id = w.get("work_id") or ""
             title = w.get("title") or work_id
-            yield ListItem(Static(f"{work_id}  {title}", shrink=True), value=w)
+            cls = _status_class(w)
+            yield ListItem(
+                Static(f"{work_id}  {title}", shrink=True),
+                value=w,
+                classes=cls,
+            )
+
+    def refresh_works(self, works: list) -> None:
+        self._works = works
+        self.remove_children()
+        for w in works:
+            work_id = w.get("work_id") or ""
+            title = w.get("title") or work_id
+            cls = _status_class(w)
+            self.mount(
+                ListItem(
+                    Static(f"{work_id}  {title}", shrink=True),
+                    value=w,
+                    classes=cls,
+                )
+            )
 
 
 class WorkDetail(Static):
-    BORDER_TITLE = "Work details"
+    BORDER_TITLE = "WORK LIFECYCLE"
 
     def __init__(self, work: dict | None = None, best_work_id: str | None = None, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -77,25 +114,31 @@ class WorkDetail(Static):
     def set_suggestion_content(self, text: str) -> None:
         self.update(text)
 
+    def _v(self, w: dict, k: str) -> str:
+        x = w.get(k)
+        return "null" if x is None else str(x)
+
     def _refresh(self) -> None:
         if self._work is None:
             self.update("(no work selected)")
             return
         w = self._work
-
-        def _v(k: str) -> str:
-            x = w.get(k)
-            return "null" if x is None else str(x)
-
+        export_path = w.get("export_path")
+        if export_path is None:
+            export_path = "null"
+        else:
+            export_path = str(export_path)
         lines = []
         if self._best_work_id and w.get("work_id") == self._best_work_id:
             lines.append("★ BEST")
         lines.extend([
-            f"track_id: {_v('track_id')}",
-            f"status: {_v('status')}",
-            f"prompt_version: {_v('prompt_version')}",
-            f"suggestion_hash: {_v('suggestion_hash')}",
-            f"seed_hash_hex: {_v('seed_hash_hex')}",
+            f"work_id: {self._v(w, 'work_id')}",
+            f"track_id: {self._v(w, 'track_id')}",
+            f"prompt_version: {self._v(w, 'prompt_version')}",
+            f"suggestion_hash: {self._v(w, 'suggestion_hash')}",
+            f"seed_hash_hex: {self._v(w, 'seed_hash_hex')}",
+            f"status: {self._v(w, 'status')}",
+            f"export_path: {export_path}",
         ])
         self.update("\n".join(lines))
 
@@ -126,6 +169,7 @@ class WorkCreateScreen(ModalScreen[tuple[str, str, str]]):
 
 class RestTui(App[None]):
     TITLE = "REST — Radical Noface Structural Engine"
+    CSS_PATH = "tui.css"
     BINDINGS = [
         Binding("q", "quit", "Quit"),
         Binding("c", "work_create", "Work create"),
@@ -153,8 +197,9 @@ class RestTui(App[None]):
                 yield self._work_list
                 self._detail = WorkDetail(id="work-detail", best_work_id=self._best_work_id)
                 yield self._detail
-            self._log_panel = LogPanel(id="log-panel", height=8)
-            yield self._log_panel
+            with ScrollableContainer(id="log-container", height=8):
+                self._log_panel = LogPanel(id="log-panel")
+                yield self._log_panel
         yield Footer()
 
     def _log(self, out: str, err: str) -> None:
@@ -166,6 +211,21 @@ class RestTui(App[None]):
         if err:
             parts.append(err.strip())
         self._log_panel.append_log("\n".join(parts) if parts else "(no output)")
+
+    def _refresh_works_list(self) -> None:
+        self._works = _read_works_manifest()
+        if self._work_list is not None:
+            self._work_list.refresh_works(self._works)
+        if self._works and self._selected_work:
+            wid = self._selected_work.get("work_id")
+            self._selected_work = next((w for w in self._works if w.get("work_id") == wid), self._works[0])
+        elif self._works:
+            self._selected_work = self._works[0]
+        else:
+            self._selected_work = None
+        if self._detail is not None:
+            self._detail.set_work(self._selected_work)
+            self._detail.set_best_work_id(self._best_work_id)
 
     def on_mount(self) -> None:
         if self._work_list and self._works:
@@ -212,7 +272,7 @@ class RestTui(App[None]):
                 )
                 self._log(r.stdout or "", r.stderr or "")
                 if r.returncode == 0:
-                    self._works = _read_works_manifest()
+                    self._refresh_works_list()
             except Exception as e:
                 self._log("", str(e))
 
@@ -240,6 +300,7 @@ class RestTui(App[None]):
                 timeout=30,
             )
             self._log(r.stdout or "", r.stderr or "")
+            self._refresh_works_list()
         except Exception as e:
             self._log("", str(e))
 
@@ -282,6 +343,7 @@ class RestTui(App[None]):
             else:
                 self.notify("FAIL", severity="error", timeout=3)
                 self.query_one(Footer).update("Validate: FAIL")
+            self._refresh_works_list()
         except Exception as e:
             self._log("", str(e))
             self.query_one(Footer).update("Validate: FAIL")
