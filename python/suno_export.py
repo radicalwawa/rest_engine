@@ -3,7 +3,7 @@
 Export Suno prompt for a track from Album 5 identities.
 Input: track_id (default: radical.grey)
 Reads: domain/album5_identities.json, tracks/{track_id}.json
-Output: python/out/suno/{track_id}__suno_prompt.txt
+Output: python/out/suno/{track_id}__{variation}__suno_prompt.txt
 """
 import argparse
 import json
@@ -47,11 +47,20 @@ def build_vocal_dna(vd: dict) -> str:
     return line
 
 
+VARIATION_SUFFIX = {
+    "v0": "",
+    "v1": "daha minimal",
+    "v2": "daha perküsyon + daha sub",
+}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Export Suno prompt for Album 5 track")
     parser.add_argument("--track_id", default="radical.grey", help="Track id (default: radical.grey)")
+    parser.add_argument("--variation", choices=["v0", "v1", "v2"], default="v0", help="v0=base, v1=daha minimal, v2=daha perküsyon + daha sub")
     args = parser.parse_args()
     track_id = args.track_id
+    variation = args.variation
 
     identities_path = DOMAIN / "album5_identities.json"
     data = load_json(identities_path)
@@ -65,7 +74,7 @@ def main():
         load_json(track_path)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = OUT_DIR / f"{track_id}__suno_prompt.txt"
+    out_path = OUT_DIR / f"{track_id}__{variation}__suno_prompt.txt"
 
     title = f"{identity['track_id']} — {identity['state_label']}"
     bpm_feel = f"{identity['bpm_min']}–{identity['bpm_max']} BPM feel"
@@ -103,6 +112,8 @@ def main():
         "CONSTRAINTS:",
         constraints,
     ]
+    if VARIATION_SUFFIX.get(variation):
+        lines.append("VARIATION: " + VARIATION_SUFFIX[variation])
     text = "\n".join(lines)
 
     out_path.write_text(text, encoding="utf-8")
