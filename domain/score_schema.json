@@ -1,0 +1,6 @@
+{
+  "score_keys": ["kick_sub", "vocal_space", "state_purity", "dj_flow", "minimalism", "energy_curve", "relisten"],
+  "scale": [0, 10],
+  "total_max": 70,
+  "encoding": "object"
+}
