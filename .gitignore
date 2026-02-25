@@ -2,9 +2,16 @@
 runs/
 
 # Python
+pycache/
+__pycache__/
+*.pyc
+*.py[cod]
+.env
+.python-version
+.venv/
+venv/
 python/out/
 !python/out/suggestions_deprecated/
 !python/out/suggestions_deprecated/**
-__pycache__/
-*.py[cod]
 .python/
+.DS_Store
