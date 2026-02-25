@@ -19,3 +19,5 @@
 **Active tracks:** Exactly 5. Defined in `schemas/track.schema.json` enum. `tracks/` holds only those; deprecated material in `tracks_deprecated/` only.
 
 **Schema breaking change policy:** Changes to `schemas/*.json` that remove required fields, narrow enum values, or change types are breaking. Require explicit approval and version bump. Additive changes (new optional fields, new enum values) are allowed with version bump. CI runs `python python/validate.py` on push/PR; breaking changes must not land without updating all consumers and data.
+
+**Environment freeze:** Python 3.12.6. On Windows use `py` launcher if `python` is not on PATH. Install: `py -m pip install -r python/requirements.txt` (from repo root). Validate: `py python/validate.py`. Do not upgrade dependencies silently. Any dependency change requires commit and validation.
