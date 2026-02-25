@@ -30,6 +30,21 @@ STATUS_CLASS = {
     "best": "status-green",
 }
 
+LIFECYCLE_ORDER = [None, "prompt_generated", "generated", "scored", "best"]
+
+
+def _transition_allowed(current: str | None, target: str) -> bool:
+    if current is None or current == "null":
+        cur_idx = 0
+    elif current in LIFECYCLE_ORDER:
+        cur_idx = LIFECYCLE_ORDER.index(current)
+    else:
+        return False
+    if target not in LIFECYCLE_ORDER:
+        return False
+    target_idx = LIFECYCLE_ORDER.index(target)
+    return target_idx == cur_idx + 1
+
 
 def _read_works_manifest() -> list:
     if not WORKS_MANIFEST.exists():
@@ -342,6 +357,10 @@ class RestTui(App[None]):
         work_id = self._selected_work.get("work_id") or ""
         if not work_id:
             self._log("", "No work_id")
+            return
+        current = self._selected_work.get("status")
+        if not _transition_allowed(current, status):
+            self._log("", "INVALID TRANSITION")
             return
         try:
             r = subprocess.run(
