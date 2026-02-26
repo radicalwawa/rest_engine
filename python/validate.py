@@ -16,6 +16,8 @@ SUGGESTIONS_DIR = REPO_ROOT / "python" / "out" / "suggestions"
 TRACKS_DEPRECATED = REPO_ROOT / "tracks_deprecated"
 KNOWLEDGE = REPO_ROOT / "knowledge"
 REGISTRY_JSON = KNOWLEDGE / "registry.json"
+SOUND_LIBRARY_SCHEMA = SCHEMAS / "sound_library.schema.json"
+SOUND_LIBRARY_JSON = KNOWLEDGE / "sound_library.json"
 
 REQUIRED_STATES = {"radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"}
 
@@ -119,6 +121,42 @@ def main():
                     errors.append(f"{REGISTRY_JSON.relative_to(REPO_ROOT)}: notes must be null or string")
         except json.JSONDecodeError as e:
             errors.append(f"{REGISTRY_JSON.relative_to(REPO_ROOT)}: {e}")
+
+    # --- Sound library v1 integrity (only read sound_library schema + JSON) ---
+    if SOUND_LIBRARY_SCHEMA.exists() and SOUND_LIBRARY_JSON.exists():
+        try:
+            data = load_json(SOUND_LIBRARY_JSON)
+            if not isinstance(data, dict):
+                errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: must be a JSON object")
+            else:
+                sv = data.get("schema_version")
+                if sv is None or (isinstance(sv, str) and not sv.strip()):
+                    errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: schema_version must exist and not be null or empty")
+                if "assets" not in data:
+                    errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets must exist")
+                elif not isinstance(data.get("assets"), list):
+                    errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets must be an array")
+                else:
+                    ids_seen = []
+                    for i, asset in enumerate(data["assets"]):
+                        if not isinstance(asset, dict):
+                            errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets[{i}] must be an object")
+                            continue
+                        color = asset.get("color_state")
+                        if color not in REQUIRED_STATES:
+                            errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets[{i}].color_state must be one of {REQUIRED_STATES}")
+                        if "notes" not in asset:
+                            errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets[{i}].notes must exist (null or string)")
+                        if "updated_at" not in asset:
+                            errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets[{i}].updated_at must exist (null or string)")
+                        aid = asset.get("id")
+                        if aid is not None:
+                            if aid in ids_seen:
+                                errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: assets[{i}].id must be unique; duplicate id={aid!r}")
+                            else:
+                                ids_seen.append(aid)
+        except json.JSONDecodeError as e:
+            errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: {e}")
 
     # --- Schema validation: bounded to schemas/ + tracks/ only (no repo walk) ---
     if not errors and SCHEMAS.exists():
