@@ -92,5 +92,11 @@ On **final.** or explicit shutdown request, respond with exactly:
 - **Python version:** Declared in `.python-version` (pyenv-style; exact version string).
 - **Dependencies:** Frozen in `python/requirements.txt`. Do not upgrade dependencies silently; any dependency change requires commit and validation.
 
+### Windows Python Alias
+
+- **Preferred local commands:** `py -X faulthandler python/validate.py`, or the direct `python.exe` path from `py -0p`.
+- If `python` hangs on Windows, disable Windows Store "App execution aliases" for `python.exe` and `python3.exe` (Settings → Apps → Advanced app settings → App execution aliases).
+- This is an OS-level nondeterminism; it does not affect structural determinism.
+
 ────────────────────────
 END OF MASTERPROMPT.
