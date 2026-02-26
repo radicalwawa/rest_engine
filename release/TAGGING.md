@@ -1,0 +1,3 @@
+- Tag name: v1.1.0
+- Tag command used: `git tag -a v1.1.0 -m "REST Engine v1.1.0 (hardened successor)"`
+- Validation command used: `py -X faulthandler python/validate.py`
