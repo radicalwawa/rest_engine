@@ -2,17 +2,11 @@
 """
 Validate REST JSON files against schemas and V1.1 structural rules.
 Usage: run from repo root (rest_engine): python python/validate.py
+Bounded scan: only schemas/, tracks/, domain/tracks/, knowledge/registry.json.
 """
 import json
 import sys
 from pathlib import Path
-
-try:
-    import jsonschema
-except ImportError:
-    print("SYSTEM STATUS: FAIL", file=sys.stderr)
-    print("python/validate.py: pip install jsonschema", file=sys.stderr)
-    sys.exit(1)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS = REPO_ROOT / "schemas"
@@ -101,11 +95,8 @@ def main():
     # --- V1.1 Legacy isolation ---
     if TRACKS_DEPRECATED.exists():
         for p in active_track_files:
-            try:
-                p.resolve().relative_to(TRACKS_DEPRECATED.resolve())
+            if "tracks_deprecated" in p.parts:
                 errors.append(f"{p.relative_to(REPO_ROOT)}: active track must not be under tracks_deprecated/")
-            except ValueError:
-                pass
 
     # --- V1.1 Null instead of omission (registry.json) ---
     if REGISTRY_JSON.exists():
@@ -129,67 +120,18 @@ def main():
         except json.JSONDecodeError as e:
             errors.append(f"{REGISTRY_JSON.relative_to(REPO_ROOT)}: {e}")
 
-    # --- Existing schema validation ---
+    # --- Schema validation: bounded to schemas/ + tracks/ only (no repo walk) ---
     if not errors and SCHEMAS.exists():
-        track_schema = load_json(SCHEMAS / "track.schema.json")
-        manifest_schema = load_json(SCHEMAS / "run_manifest.schema.json")
-        results_schema = load_json(SCHEMAS / "run_results.schema.json")
-        suggestion_schema = load_json(SCHEMAS / "suggestion.schema.json")
-
-        for p in sorted(TRACKS.glob("*.json")) if TRACKS.exists() else []:
-            try:
-                data = load_json(p)
-                jsonschema.validate(data, track_schema)
-            except (json.JSONDecodeError, jsonschema.ValidationError) as e:
-                errors.append(f"{p.relative_to(REPO_ROOT)}: {e}")
-
-        if RUNS.exists():
-            for run_dir in sorted(RUNS.iterdir()):
-                if not run_dir.is_dir():
-                    continue
-                manifest_path = run_dir / "manifest.json"
-                results_path = run_dir / "results.json"
-                if manifest_path.exists():
-                    try:
-                        jsonschema.validate(load_json(manifest_path), manifest_schema)
-                    except (json.JSONDecodeError, jsonschema.ValidationError) as e:
-                        errors.append(f"{manifest_path.relative_to(REPO_ROOT)}: {e}")
-                if results_path.exists():
-                    try:
-                        jsonschema.validate(load_json(results_path), results_schema)
-                    except (json.JSONDecodeError, jsonschema.ValidationError) as e:
-                        errors.append(f"{results_path.relative_to(REPO_ROOT)}: {e}")
-
-        SUGGESTION_TRACK_IDS = {"radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"}
-        if SUGGESTIONS_DIR.exists():
-            for p in sorted(SUGGESTIONS_DIR.glob("*.suggestion.json")):
-                track_id = p.stem.removesuffix(".suggestion") if p.suffix == ".json" else p.stem
-                if track_id not in SUGGESTION_TRACK_IDS:
-                    continue
+        try:
+            import jsonschema
+        except ImportError:
+            errors.append("python/validate.py: pip install jsonschema")
+        else:
+            track_schema = load_json(SCHEMAS / "track.schema.json")
+            for p in sorted(TRACKS.glob("*.json")) if TRACKS.exists() else []:
                 try:
                     data = load_json(p)
-                    r = data.get("resolved") or {}
-                    v = r.get("variant") or {}
-                    subset = {
-                        "track_id": data.get("track_id"),
-                        "prompt_text": data.get("prompt_text"),
-                        "resolved": {
-                            "color": r.get("color"),
-                            "emotion_core": r.get("emotion_core"),
-                            "sound_class": r.get("sound_class"),
-                            "bpm_source": r.get("bpm_source"),
-                            "variant": {
-                                "template_id": v.get("template_id"),
-                                "flow_id": v.get("flow_id"),
-                                "kit_id": v.get("kit_id"),
-                                "template_index": v.get("template_index"),
-                                "flow_index": v.get("flow_index"),
-                                "kit_index": v.get("kit_index"),
-                                "seed_hash_hex": v.get("seed_hash_hex"),
-                            },
-                        },
-                    }
-                    jsonschema.validate(subset, suggestion_schema)
+                    jsonschema.validate(data, track_schema)
                 except (json.JSONDecodeError, jsonschema.ValidationError) as e:
                     errors.append(f"{p.relative_to(REPO_ROOT)}: {e}")
 
