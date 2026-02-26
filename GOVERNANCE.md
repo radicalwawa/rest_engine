@@ -13,6 +13,7 @@ Null instead of omission. No randomness. No timestamps in deterministic chains. 
 
 ## GOVERNANCE
 
+- **Versioning:** Canonical repo version marker: `VERSION`.
 - **Schema version:** Explicit in each schema (`$id`, `version` where applicable).
 - **Source of truth:** JSON. Python is tooling only.
 - **Null policy:** Use `null` instead of omission for optional fields in canonical JSON.
