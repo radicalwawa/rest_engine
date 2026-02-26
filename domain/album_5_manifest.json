@@ -43,5 +43,14 @@
       "allowed_instrumentation_profile": null,
       "drop_logic": null
     }
-  ]
+  ],
+  "release_format": {
+    "radio_version_target_sec": 175,
+    "radio_version_min_sec": 150,
+    "radio_version_max_sec": 190,
+    "extended_version_target_sec": 300,
+    "extended_version_min_sec": 280,
+    "extended_version_max_sec": 360,
+    "release_strategy": "Release radio first. Release extended 2-4 weeks later."
+  }
 }
