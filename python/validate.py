@@ -18,6 +18,7 @@ KNOWLEDGE = REPO_ROOT / "knowledge"
 REGISTRY_JSON = KNOWLEDGE / "registry.json"
 SOUND_LIBRARY_SCHEMA = SCHEMAS / "sound_library.schema.json"
 SOUND_LIBRARY_JSON = KNOWLEDGE / "sound_library.json"
+ALBUM_5_MANIFEST = REPO_ROOT / "domain" / "album_5_manifest.json"
 
 REQUIRED_STATES = {"radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"}
 
@@ -203,6 +204,53 @@ def main():
                     errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding.{key} asset {aid!r} color_state does not match track {track_id!r}")
         except (json.JSONDecodeError, OSError) as e:
             errors.append(f"{p.relative_to(REPO_ROOT)}: {e}")
+
+    # --- Album duration policy (domain/album_5_manifest.json) ---
+    RELEASE_FORMAT_KEYS = [
+        "radio_version_target_sec", "radio_version_min_sec", "radio_version_max_sec",
+        "extended_version_target_sec", "extended_version_min_sec", "extended_version_max_sec",
+        "release_strategy"
+    ]
+    if ALBUM_5_MANIFEST.exists():
+        try:
+            data = load_json(ALBUM_5_MANIFEST)
+            if not isinstance(data, dict):
+                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: must be a JSON object")
+            else:
+                rf = data.get("release_format")
+                if rf is None:
+                    errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: release_format must exist")
+                elif not isinstance(rf, dict):
+                    errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: release_format must be an object")
+                else:
+                    for key in RELEASE_FORMAT_KEYS:
+                        if key not in rf:
+                            errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: release_format must have key {key!r}")
+                    if not errors:
+                        int_keys = [k for k in RELEASE_FORMAT_KEYS if k != "release_strategy"]
+                        for key in int_keys:
+                            v = rf.get(key)
+                            if v is not None and not isinstance(v, int):
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: release_format.{key} must be integer")
+                        if not errors:
+                            r_min, r_tgt, r_max = rf.get("radio_version_min_sec"), rf.get("radio_version_target_sec"), rf.get("radio_version_max_sec")
+                            e_min, e_tgt, e_max = rf.get("extended_version_min_sec"), rf.get("extended_version_target_sec"), rf.get("extended_version_max_sec")
+                            if r_min is not None and r_tgt is not None and r_min > r_tgt:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: radio_version_min_sec must be <= radio_version_target_sec")
+                            if r_tgt is not None and r_max is not None and r_tgt > r_max:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: radio_version_target_sec must be <= radio_version_max_sec")
+                            if r_min is not None and r_max is not None and r_min > r_max:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: radio_version_min_sec must be <= radio_version_max_sec")
+                            if e_min is not None and e_tgt is not None and e_min > e_tgt:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: extended_version_min_sec must be <= extended_version_target_sec")
+                            if e_tgt is not None and e_max is not None and e_tgt > e_max:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: extended_version_target_sec must be <= extended_version_max_sec")
+                            if e_min is not None and e_max is not None and e_min > e_max:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: extended_version_min_sec must be <= extended_version_max_sec")
+                            if r_max is not None and e_min is not None and r_max >= e_min:
+                                errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: radio_version_max_sec must be < extended_version_min_sec")
+        except json.JSONDecodeError as e:
+            errors.append(f"{ALBUM_5_MANIFEST.relative_to(REPO_ROOT)}: {e}")
 
     # --- Schema validation: bounded to schemas/ + tracks/ only (no repo walk) ---
     if not errors and SCHEMAS.exists():
