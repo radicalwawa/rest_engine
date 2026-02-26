@@ -20,5 +20,12 @@
     "tested_bpms": [],
     "proven_bpm": null,
     "drift_notes": []
+  },
+  "library_binding": {
+    "kick": "radical.blue.kick.01",
+    "bass": "radical.blue.bass.01",
+    "hat": "radical.blue.hat.01",
+    "lead": "radical.blue.pad.01",
+    "texture": "radical.blue.texture.01"
   }
 }

@@ -14,7 +14,8 @@
     "keyword_vector",
     "techno_profile",
     "constraints",
-    "calibration"
+    "calibration",
+    "library_binding"
   ],
   "properties": {
     "id": {
@@ -78,6 +79,18 @@
           "type": "array",
           "items": { "type": "string" }
         }
+      }
+    },
+    "library_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kick", "bass", "hat", "lead", "texture"],
+      "properties": {
+        "kick": { "type": "string" },
+        "bass": { "type": "string" },
+        "hat": { "type": "string" },
+        "lead": { "type": "string" },
+        "texture": { "type": "string" }
       }
     }
   }
