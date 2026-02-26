@@ -87,5 +87,10 @@ Automated validation must exist. `.github/workflows/validate.yml` runs on push a
 On **final.** or explicit shutdown request, respond with exactly:
 **SYSTEM STATUS: PASS. Shutdown acknowledged.**
 
+## Environment Freeze Requirements
+
+- **Python version:** Declared in `.python-version` (pyenv-style; exact version string).
+- **Dependencies:** Frozen in `python/requirements.txt`. Do not upgrade dependencies silently; any dependency change requires commit and validation.
+
 ────────────────────────
 END OF MASTERPROMPT.
