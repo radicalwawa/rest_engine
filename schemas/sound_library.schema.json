@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rest_engine/schemas/sound_library.schema.json",
+  "title": "REST Sound Library Schema",
+  "description": "Sound library asset catalog for REST Engine v1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "assets"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Schema version string (e.g. 1.0)."
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" },
+      "description": "List of sound library assets."
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "color_state",
+        "role",
+        "intensity",
+        "tags",
+        "path",
+        "license",
+        "notes",
+        "updated_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)*$",
+          "description": "Unique asset id (dot-separated lowercase alphanumeric)."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["one_shot", "loop", "preset", "fx_chain", "midi", "vocal"],
+          "description": "Asset type."
+        },
+        "color_state": {
+          "type": "string",
+          "enum": ["radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"],
+          "description": "Track color state (exactly one per asset)."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["kick", "bass", "hat", "perc", "synth", "pad", "texture", "fx", "riser", "vocal", "atmos"],
+          "description": "Functional role in a track."
+        },
+        "intensity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Intensity level 1..5."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tags for discovery."
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repo-relative or external reference path."
+        },
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "usage", "attribution"],
+          "properties": {
+            "source": { "type": "string", "description": "License source." },
+            "usage": { "type": "string", "description": "Usage terms." },
+            "attribution": { "type": ["string", "null"], "description": "Attribution text or null." }
+          }
+        },
+        "notes": { "type": ["string", "null"], "description": "Optional notes. Null instead of omission." },
+        "updated_at": { "type": ["string", "null"], "description": "Last update timestamp or null." },
+        "bpm_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "integer", "minimum": 1, "maximum": 400 },
+            "max": { "type": "integer", "minimum": 1, "maximum": 400 }
+          },
+          "description": "Optional BPM range; min must be <= max."
+        },
+        "key": { "type": ["string", "null"] },
+        "duration_ms": { "type": ["integer", "null"] },
+        "loudness_lufs": { "type": ["number", "null"] },
+        "checksum_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "deprecated"]
+        },
+        "deprecated_reason": { "type": ["string", "null"] },
+        "replacement_id": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
