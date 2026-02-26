@@ -43,11 +43,11 @@ def discover_active_track_files():
         if files:
             return list(files)
     out = []
-    for d in [REPO_ROOT, REPO_ROOT / "domain", REPO_ROOT / "tracks"]:
-        if not d.exists():
+    for d in [TRACKS, domain_tracks]:
+        if not d.exists() or not d.is_dir():
             continue
-        for p in d.rglob("*.json"):
-            if "track" in p.stem.lower() and "tracks_deprecated" not in p.parts:
+        for p in d.glob("*track*.json"):
+            if "tracks_deprecated" not in p.parts:
                 out.append(p)
     return sorted(set(out)) if out else []
 
