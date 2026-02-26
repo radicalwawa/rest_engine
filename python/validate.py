@@ -158,6 +158,52 @@ def main():
         except json.JSONDecodeError as e:
             errors.append(f"{SOUND_LIBRARY_JSON.relative_to(REPO_ROOT)}: {e}")
 
+    # --- Track-to-library binding integrity ---
+    LIBRARY_BINDING_KEYS = ["kick", "bass", "hat", "lead", "texture"]
+    asset_to_color = {}
+    if SOUND_LIBRARY_JSON.exists():
+        try:
+            lib_data = load_json(SOUND_LIBRARY_JSON)
+            if isinstance(lib_data, dict) and isinstance(lib_data.get("assets"), list):
+                for asset in lib_data["assets"]:
+                    if isinstance(asset, dict):
+                        aid = asset.get("id")
+                        color = asset.get("color_state")
+                        if aid is not None and color is not None:
+                            asset_to_color[aid] = color
+        except (json.JSONDecodeError, OSError):
+            pass
+    for p in active_track_files:
+        try:
+            data = load_json(p)
+            if not isinstance(data, dict):
+                continue
+            track_id = data.get("id")
+            if track_id not in REQUIRED_STATES:
+                continue
+            binding = data.get("library_binding")
+            if binding is None:
+                errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding must exist")
+                continue
+            if not isinstance(binding, dict):
+                errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding must be an object")
+                continue
+            for key in LIBRARY_BINDING_KEYS:
+                if key not in binding:
+                    errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding must have key {key!r}")
+                    continue
+                aid = binding.get(key)
+                if not isinstance(aid, str):
+                    errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding.{key} must be a string asset id")
+                    continue
+                if aid not in asset_to_color:
+                    errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding.{key} asset id {aid!r} not in sound library")
+                    continue
+                if asset_to_color[aid] != track_id:
+                    errors.append(f"{p.relative_to(REPO_ROOT)}: library_binding.{key} asset {aid!r} color_state does not match track {track_id!r}")
+        except (json.JSONDecodeError, OSError) as e:
+            errors.append(f"{p.relative_to(REPO_ROOT)}: {e}")
+
     # --- Schema validation: bounded to schemas/ + tracks/ only (no repo walk) ---
     if not errors and SCHEMAS.exists():
         try:
