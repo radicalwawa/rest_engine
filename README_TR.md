@@ -2,6 +2,16 @@
 
 REST deterministik bir bilinç-ses motorudur. Tek gerçek kaynak JSON’dır; Python yalnızca araçtır.
 
+## Hızlı Başlangıç — Doğrulama
+
+Reponun kökünden:
+
+- **Windows:** `py -X faulthandler python/validate.py`  
+  `python` takılırsa Windows Store “Uygulama yürütme diğer adları”ndan python.exe/python3.exe kapatın (GOVERNANCE.md).
+- **Betikler:** Windows’ta deterministik giriş için `scripts\validate.cmd` veya `scripts\validate.ps1`.
+
+Politika: GOVERNANCE.md, docs/PRODUCTION_LOCK.md.
+
 ## 5 Renk Modeli
 
 Beş sabit durum. Renk başına bir parça. Karıştırma yok.
@@ -16,29 +26,24 @@ Beş sabit durum. Renk başına bir parça. Karıştırma yok.
 
 Parça kimlikleri: radical.grey, radical.blue, radical.green, radical.cream, radical.black.
 
+## Repo Katmanları
+
+- **JSON / Şemalar:** Tek gerçek kaynak. Şemalar `schemas/`. Eksik yerine null.
+- **Python:** Sadece araç. `python/validate.py`, `python/production/` altında üretim betikleri.
+- **Cursor:** Çalıştırma disiplini; kurallar `.cursor/rules/`.
+- **Suno:** Export ve prompt pipeline; parçalar ve sound library ile bağlantılı.
+
+## Sound Library
+
+- `knowledge/sound_library.json` — varlık kataloğu (şema: `schemas/sound_library.schema.json`).
+- Her aktif parçada `library_binding` zorunlu: kick, bass, hat, lead, texture (kütüphanedeki asset id’leri).
+- Doğrulama binding bütünlüğü ve color_state eşleşmesini zorunlu kılar.
+
+## Süre Politikası
+
+- `domain/album_5_manifest.json` — `release_format` radyo ve extended sürüm hedeflerini (sn), min/target/max ve yayın stratejisini tanımlar.
+- Doğrulama sayısal aralıkları ve ayrım kuralını (radio max < extended min) zorunlu kılar.
+
 ## Yönetişim
 
-- JSON gerçektir. Eksik yerine null.
-- Commit başına tek kapsam. Her şeyin üstünde determinizm.
-- Rastgelelik yok. Estetik sapma yok.
-
-## Mimari
-
-- **domain/** — Yapılandırma, works_manifest, albüm kimlikleri, şemalar.
-- **tracks/** — Yalnızca beş aktif parça JSON dosyası. Eski parçalar tracks_deprecated/ içinde.
-- **knowledge/** — sound_library.json (v2+), color_profiles, kits, flows, templates.
-- **python/** — validate.py, suggest.py, suno_export.py, ui.py (CLI), tui.py (TUI). Çıktılar python/out/ altında.
-
-Öneri akışı: domain + knowledge + tracks → python/out/suggestions/<track_id>.suggestion.json. resolved alanı color, emotion_core, sound_class, bpm_source içerir; variant seed_hash_hex içerir.
-
-## Determinizm
-
-- Tüm yapılandırma JSON’da; belirtilmeyen değerler null.
-- Sabit anahtarlar ve sıra; yapılandırmada zaman damgası veya rastgelelik yok.
-- validate.py parça ve önerileri şemalara karşı doğrular.
-
-## Güncel Sistem Durumu
-
-- 5 renk modeli aktif. sound_library v2.2.
-- Deterministik varyant sistemi; çapraz dil güvenliği için seed_hash_hex.
-- Eski parçalar tracks_deprecated içinde izole.
+Commit başına tek kapsam. Commit öncesi validate. Spontane refactor yok. GOVERNANCE.md ve docs/PRODUCTION_LOCK.md.
