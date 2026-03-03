@@ -12,13 +12,11 @@
     "track_id": {
       "type": "string",
       "enum": [
-        "radical.luxr",
-        "radical.pride",
-        "radical.wrath",
-        "radical.sloth",
-        "radical.greed",
-        "radical.glutt",
-        "radical.envy"
+        "radical.grey",
+        "radical.blue",
+        "radical.green",
+        "radical.cream",
+        "radical.black"
       ]
     },
     "bpm": { "type": "integer" },
