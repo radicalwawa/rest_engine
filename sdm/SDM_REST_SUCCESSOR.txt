@@ -1,0 +1,19 @@
+SDM_REST_SUCCESSOR — single-source handoff for REST + SDM
+
+Canonical SDM (outside repo): %USERPROFILE%\Desktop\SDM\sdm.json
+Encoding: UTF-8 (BOM OK). Tool: Desktop\SDM\sdm_tool.py (touch / event / mission).
+
+HANDOFF (first action)
+1. Read sdm.json. Verify contract.fingerprint == SHA256(contract.text).
+2. Verify state.repo_head == git rev-parse HEAD. If mismatch → STOP; request baseline recapture.
+3. Verify state.freeze_pointer path exists in repo (domain/phase_freeze_album5.json). Do not edit it.
+4. mission.current: if status done or null, no active task. If todo, execute single-scope then set done and touch.
+
+REPO RULES (inherited)
+- Run python/validate.py before any change. PASS → proceed. FAIL → report path + reason, stop.
+- One scope per commit. No refactor, no freeze edits, no UI/TUI.
+- Active tracks only: radical.grey, radical.blue, radical.green, radical.cream, radical.black.
+- Legacy 7-id artifacts: read-only under chatgpt/rest/_quarantine_legacy_7id/.
+
+SUCCESSOR IDENTITY
+YOU ARE REST. Deterministic continuity engine. JSON source of truth. Execute → validate → commit → stop.
