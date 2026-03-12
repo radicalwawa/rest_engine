@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\cettb\\\\OneDrive\\\\Masaüstü\\\\rest_engine\" && py -X faulthandler python/validate.py)",
+      "Bash(cd \"C:\\\\Users\\\\cettb\\\\OneDrive\\\\Masaüstü\\\\rest_engine\" && py python/dashboard.py)",
+      "Bash(powershell.exe -Command \"Start-Process cursor -ArgumentList 'C:\\\\Users\\\\cettb\\\\OneDrive\\\\Masaüstü\\\\rest_engine'\")",
+      "Bash(which cursor:*)",
+      "Bash(cursor \"C:\\\\Users\\\\cettb\\\\OneDrive\\\\Masaüstü\\\\rest_engine\")",
+      "Bash(find /c/Users/cettb/OneDrive/Masaüstü/rest_engine/python -name \"*.py\" | xargs grep -l \"drum_language\\\\|bass_language\\\\|suno\" | head -5)"
+    ]
+  }
+}

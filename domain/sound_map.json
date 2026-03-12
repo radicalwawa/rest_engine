@@ -10,10 +10,10 @@
     {"color": "black", "emotion_core": "divine_smoke", "notes": null}
   ],
   "mappings": [
-    {"track_id": "radical.grey", "color": "grey", "sound_class": "cold_industrial", "notes": null},
-    {"track_id": "radical.blue", "color": "blue", "sound_class": "dark_hypnotic_modular", "notes": null},
-    {"track_id": "radical.green", "color": "green", "sound_class": "hypnotic_loop_techno", "notes": null},
-    {"track_id": "radical.cream", "color": "cream", "sound_class": "high_shine_peak", "notes": null},
-    {"track_id": "radical.black", "color": "black", "sound_class": "distorted_hard_techno", "notes": null}
+    {"track_id": "radical.grey", "color": "grey", "sound_class": "cold_industrial", "techno_genre": "industrial techno", "rap_identity": "hard_rap", "notes": null},
+    {"track_id": "radical.blue", "color": "blue", "sound_class": "dark_hypnotic_modular", "techno_genre": "dub techno", "rap_identity": "rap_or_spoken", "notes": null},
+    {"track_id": "radical.green", "color": "green", "sound_class": "hypnotic_loop_techno", "techno_genre": "minimal techno", "rap_identity": "rap_or_chanted", "notes": null},
+    {"track_id": "radical.cream", "color": "cream", "sound_class": "high_shine_peak", "techno_genre": "melodic techno", "rap_identity": "rap_sung_edge", "notes": null},
+    {"track_id": "radical.black", "color": "black", "sound_class": "distorted_hard_techno", "techno_genre": "hard techno", "rap_identity": "chant_or_spoken", "notes": null}
   ]
 }

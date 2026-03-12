@@ -13,7 +13,6 @@ SCHEMAS = REPO_ROOT / "schemas"
 TRACKS = REPO_ROOT / "tracks"
 RUNS = REPO_ROOT / "runs"
 SUGGESTIONS_DIR = REPO_ROOT / "python" / "out" / "suggestions"
-TRACKS_DEPRECATED = REPO_ROOT / "tracks_deprecated"
 KNOWLEDGE = REPO_ROOT / "knowledge"
 REGISTRY_JSON = KNOWLEDGE / "registry.json"
 SOUND_LIBRARY_SCHEMA = SCHEMAS / "sound_library.schema.json"
@@ -71,7 +70,7 @@ def main():
     active_track_files = discover_active_track_files()
     for p in active_track_files:
         rel = p.relative_to(REPO_ROOT)
-        if str(TRACKS_DEPRECATED) in str(p) or rel.parts[0] == "tracks_deprecated":
+        if "tracks_deprecated" in p.parts:
             errors.append(f"{rel}: active track must not be under tracks_deprecated/")
     try:
         ids_seen = []
@@ -94,12 +93,6 @@ def main():
     except (json.JSONDecodeError, OSError) as e:
         errors.append(f"tracks: {e}")
     print("Active tracks (counted):", [str(p.relative_to(REPO_ROOT)) for p in active_track_files], file=sys.stderr)
-
-    # --- V1.1 Legacy isolation ---
-    if TRACKS_DEPRECATED.exists():
-        for p in active_track_files:
-            if "tracks_deprecated" in p.parts:
-                errors.append(f"{p.relative_to(REPO_ROOT)}: active track must not be under tracks_deprecated/")
 
     # --- V1.1 Null instead of omission (registry.json) ---
     if REGISTRY_JSON.exists():

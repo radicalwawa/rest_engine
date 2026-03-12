@@ -10,7 +10,7 @@ From repo root:
   If `python` hangs, disable Windows Store "App execution aliases" for python.exe/python3.exe (see GOVERNANCE.md).
 - **Scripts:** `scripts\validate.cmd` or `scripts\validate.ps1` (Windows) for a deterministic entrypoint.
 
-Policy: GOVERNANCE.md, docs/PRODUCTION_LOCK.md.
+Policy: GOVERNANCE.md, docs/PRODUCTION_LOCK.md. Claude entry: `claude/README.md`.
 
 ## Repository layers
 

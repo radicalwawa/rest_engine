@@ -10,7 +10,7 @@ Operational and migration log for the REST (Radical Noface Structural Engine) re
 - **Generator:** suggest.py reads sound_map v2 and color_profiles; resolved contains color, emotion_core, sound_class, bpm_source, variant (template_id, flow_id, kit_id, indices, seed_hash_hex). prompt_text built from selected template skeleton (placeholder replace). Fallback: legacy prompt build if no skeleton.
 - **Dataset:** dataset.py uses color + emotion_core; suggestion_hash from prompt_text | bpm_override | sound_class | color | emotion_core.
 - **Schemas:** track.schema.json and run_results.schema.json track_id enum updated to 5 colors. suggestion.schema.json added for suggestion outputs.
-- **Validation:** validate.py validates tracks, runs (manifest/results), and suggestions (python/out/suggestions/*.suggestion.json). Only active 5 track_ids are validated; legacy 7-track suggestion files are skipped with a single-line log: `skipped legacy suggestion: <path>`.
+- **Validation:** validate.py validates schemas, tracks (exactly 5), knowledge/registry.json, knowledge/sound_library.json, track–library binding, and domain/album_5_manifest.json. It does not validate suggestion outputs.
 
 ## Sound library v2.2
 
@@ -22,7 +22,7 @@ Operational and migration log for the REST (Radical Noface Structural Engine) re
 - One scope per commit. No batched unrelated edits.
 - JSON source of truth; Python is tooling only. Null instead of omission.
 - Deterministic ordering; no timestamps or randomness in config/output.
-- Legacy suggestion outputs: either move to python/out/suggestions_deprecated/ or leave under .gitignore; validate skips them by track_id.
+- Legacy suggestion outputs: move to python/out/suggestions_deprecated/ or leave under .gitignore; they are not validated by validate.py.
 
 ## Successor
 

@@ -1,40 +1,38 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "updated_at": null,
-  "notes": null,
+  "notes": "5-key score system. max 2 actions per revision.",
   "applies_to": "album5_identities+suno_prompt_format",
-  "score_total_max": 70,
+  "score_total_max": 50,
   "keys_order": [
-    "kick_sub_uyumu",
-    "vokal_alani",
-    "renk_safligi",
-    "akis_dj_uygunlugu",
-    "minimalizm_disiplini",
-    "enerji_egrisi",
-    "tekrar_dinlenebilirlik"
+    "mix",
+    "vocal",
+    "color",
+    "flow",
+    "replay"
   ],
   "thresholds": {
-    "kick_sub_uyumu": 7,
-    "vokal_alani": 7,
-    "renk_safligi": 8,
-    "akis_dj_uygunlugu": 7,
-    "minimalizm_disiplini": 6,
-    "enerji_egrisi": 7,
-    "tekrar_dinlenebilirlik": 7
+    "mix": 7,
+    "vocal": 7,
+    "color": 8,
+    "flow": 7,
+    "replay": 7
   },
   "actions": [
     {
-      "key": "kick_sub_uyumu",
+      "key": "mix",
       "when_below": 7,
-      "prompt_append_tr": "Düşük frekansları kulüp güvenli yap: sub baskısı güçlü ama taşmasın; kick net ve kısa; low-end temiz, bulanık olmasın.",
+      "prompt_append_tr": "Mix temizliğini artır: sub baskısı güçlü ama taşmasın; kick net ve kısa; daha az element; tek omurga loop; gereksiz katman yok.",
       "tighten": {
         "mix_targets.kick_sub_relationship": "club_safe",
-        "mix_targets.transients": "tight"
+        "mix_targets.transients": "tight",
+        "suno_prompt_guidelines.focus_add": ["minimal elements", "single backbone loop"],
+        "suno_prompt_guidelines.avoid_add": ["extra melodies", "too many layers"]
       },
       "loosen": null
     },
     {
-      "key": "vokal_alani",
+      "key": "vocal",
       "when_below": 7,
       "prompt_append_tr": "Vokale daha fazla boşluk bırak: element sayısını azalt; orta frekansta çakışma olmasın; vokal önde kalsın.",
       "tighten": {
@@ -44,44 +42,26 @@
       "loosen": null
     },
     {
-      "key": "renk_safligi",
+      "key": "color",
       "when_below": 8,
-      "prompt_append_tr": "Renk safliğini artır: bu state dışına kayma; genre_stack'e sadık kal; 'avoid' listesini kesin uygula; pop/EDM hissi verme.",
+      "prompt_append_tr": "Renk saflığını artır: bu state dışına kayma; genre_stack'e sadık kal; avoid listesini kesin uygula; pop/EDM hissi verme.",
       "tighten": {
         "suno_prompt_guidelines.enforce_avoid": true
       },
       "loosen": null
     },
     {
-      "key": "akis_dj_uygunlugu",
+      "key": "flow",
       "when_below": 7,
-      "prompt_append_tr": "DJ akışını güçlendir: drop olmasın; loop sürekliliği olsun; sert geçiş yok; baskı kademeli artsın.",
+      "prompt_append_tr": "Akış ve enerjiyi düzelt: drop olmasın; loop sürekliliği olsun; monoton olmasın ama sert geçiş de yok; baskı kademeli artsın.",
       "tighten": {
-        "suno_prompt_guidelines.allow_drop": false
-      },
-      "loosen": null
-    },
-    {
-      "key": "minimalizm_disiplini",
-      "when_below": 6,
-      "prompt_append_tr": "Daha minimal ol: daha az element; tek omurga loop; gereksiz melodik süsleme yok; sade ama ağır.",
-      "tighten": {
-        "suno_prompt_guidelines.focus_add": ["minimal elements", "single backbone loop"],
-        "suno_prompt_guidelines.avoid_add": ["extra melodies", "too many layers"]
-      },
-      "loosen": null
-    },
-    {
-      "key": "enerji_egrisi",
-      "when_below": 7,
-      "prompt_append_tr": "Enerji eğrisini düzelt: monoton olmasın ama drop da olmasın; küçük katman eklemeleriyle baskı artışı yarat.",
-      "tighten": {
+        "suno_prompt_guidelines.allow_drop": false,
         "energy_curve_hint": "small_layered_pressure_ramp"
       },
       "loosen": null
     },
     {
-      "key": "tekrar_dinlenebilirlik",
+      "key": "replay",
       "when_below": 7,
       "prompt_append_tr": "Tekrar dinlenebilirliği artır: daha az yoran üst frekans; daha temiz yapı; hook/loop daha net, rahatsız edici değil.",
       "tighten": {
@@ -93,7 +73,7 @@
   ],
   "selection_policy": {
     "max_actions_per_revision": 2,
-    "priority": ["renk_safligi", "kick_sub_uyumu", "vokal_alani", "akis_dj_uygunlugu", "minimalizm_disiplini", "enerji_egrisi", "tekrar_dinlenebilirlik"],
+    "priority": ["color", "mix", "vocal", "flow", "replay"],
     "notes": "Her revizyonda sadece en düşük 1-2 parametre hedeflenir; prompt minimal değişir; drift engellenir."
   }
 }

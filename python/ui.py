@@ -21,7 +21,9 @@ EVALS_DIR = OUT_DIR / "evals"
 WORKS_MANIFEST = DOMAIN_DIR / "works_manifest.json"
 SCORE_SCHEMA = DOMAIN_DIR / "score_schema.json"
 ALBUM5_IDENTITIES = DOMAIN_DIR / "album5_identities.json"
+SOUND_MAP = DOMAIN_DIR / "sound_map.json"
 SUNO_EXPORT = ROOT / "python" / "suno_export.py"
+VALIDATE_SCRIPT = ROOT / "python" / "validate.py"
 
 TRACK_IDS = ["radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"]
 
@@ -66,6 +68,16 @@ def _ensure_score_contract() -> Dict[str, Any]:
     return schema
 
 
+def _mapping_for_track(track_id: str) -> Dict[str, Any]:
+    if not SOUND_MAP.exists():
+        return {}
+    m = _read_json(SOUND_MAP)
+    for entry in m.get("mappings") or []:
+        if entry.get("track_id") == track_id:
+            return entry
+    return {}
+
+
 def cmd_work_create(args: argparse.Namespace) -> None:
     if args.track_id not in TRACK_IDS:
         raise ValueError(f"Invalid track_id: {args.track_id}")
@@ -88,17 +100,24 @@ def cmd_work_create(args: argparse.Namespace) -> None:
             print(work_id)
             return
 
-    works.append(
-        {
-            "work_id": work_id,
-            "track_id": args.track_id,
-            "series": series,
-            "title": title,
-            "volume": volume,
-            "created_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
-            "notes": None,
-        }
-    )
+    mapping = _mapping_for_track(args.track_id)
+    entry: Dict[str, Any] = {
+        "work_id": work_id,
+        "track_id": args.track_id,
+        "series": series,
+        "title": title,
+        "volume": volume,
+        "created_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "notes": None,
+    }
+    if mapping:
+        if "color" in mapping:
+            entry["color"] = mapping["color"]
+        if "techno_genre" in mapping:
+            entry["techno_genre"] = mapping["techno_genre"]
+        if "rap_identity" in mapping:
+            entry["rap_identity"] = mapping["rap_identity"]
+    works.append(entry)
 
     # keep top-level null policy: do not omit required keys; works list is fine
     manifest["updated_at"] = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
@@ -114,9 +133,10 @@ def cmd_work_list(_: argparse.Namespace) -> None:
         print("(no works)")
         return
     for w in works:
-        print(
-            f'{w.get("work_id")} | {w.get("track_id")} | {w.get("series")} | {w.get("title")} | {w.get("volume")}'
-        )
+        line = f'{w.get("work_id")} | {w.get("track_id")} | {w.get("series")} | {w.get("title")} | {w.get("volume")}'
+        if w.get("color") or w.get("techno_genre") or w.get("rap_identity"):
+            line += f' | {w.get("color")} | {w.get("techno_genre")} | {w.get("rap_identity")}'
+        print(line)
 
 
 def cmd_prompt(args: argparse.Namespace) -> None:
@@ -235,18 +255,26 @@ def build_parser() -> argparse.ArgumentParser:
     p_sc.add_argument("--note", default=None)
     p_sc.set_defaults(func=cmd_score)
 
+    p_va = sp.add_parser("validate", help="Run schema and repo validation (python/validate.py)")
+    p_va.set_defaults(func=cmd_validate)
+
     return p
 
 
-def main() -> None:
-    # Hard fail if required domain contracts missing; keeps discipline
-    for required in [WORKS_MANIFEST, SCORE_SCHEMA, ALBUM5_IDENTITIES]:
-        if not required.exists():
-            print(f"ERROR: missing required file: {required}", file=sys.stderr)
-            sys.exit(2)
+def cmd_validate(_: argparse.Namespace) -> None:
+    if not VALIDATE_SCRIPT.exists():
+        raise FileNotFoundError(str(VALIDATE_SCRIPT))
+    subprocess.check_call([sys.executable, str(VALIDATE_SCRIPT)])
 
+
+def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
+    if args.cmd != "validate":
+        for required in [WORKS_MANIFEST, SCORE_SCHEMA, ALBUM5_IDENTITIES]:
+            if not required.exists():
+                print(f"ERROR: missing required file: {required}", file=sys.stderr)
+                sys.exit(2)
     args.func(args)
 
 

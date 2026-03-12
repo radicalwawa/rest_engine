@@ -1,26 +1,22 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "updated_at": null,
-  "notes": null,
+  "notes": "7-key v1 collapsed to 5-key v2: mix=kick_sub+minimalizm, flow=akis+enerji, vocal/color/replay kept",
   "score_keys": [
-    "kick_sub_uyumu",
-    "vokal_alani",
-    "renk_safligi",
-    "akis_dj_uygunlugu",
-    "minimalizm_disiplini",
-    "enerji_egrisi",
-    "tekrar_dinlenebilirlik"
+    "mix",
+    "vocal",
+    "color",
+    "flow",
+    "replay"
   ],
   "score_labels_tr": {
-    "kick_sub_uyumu": "Kick/Sub Uyumu",
-    "vokal_alani": "Vokal Alanı",
-    "renk_safligi": "Renk Saflığı",
-    "akis_dj_uygunlugu": "Akış & DJ Uygunluğu",
-    "minimalizm_disiplini": "Minimalizm Disiplini",
-    "enerji_egrisi": "Enerji Eğrisi",
-    "tekrar_dinlenebilirlik": "Tekrar Dinlenebilirlik"
+    "mix": "Mix Temizliği",
+    "vocal": "Vokal Alanı",
+    "color": "Renk Saflığı",
+    "flow": "Akış & Enerji",
+    "replay": "Tekrar Dinlenebilirlik"
   },
   "scale": [0, 10],
-  "total_max": 70,
+  "total_max": 50,
   "encoding": "object"
 }

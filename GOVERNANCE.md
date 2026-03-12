@@ -17,10 +17,10 @@ Null instead of omission. No randomness. No timestamps in deterministic chains. 
 - **Schema version:** Explicit in each schema (`$id`, `version` where applicable).
 - **Source of truth:** JSON. Python is tooling only.
 - **Null policy:** Use `null` instead of omission for optional fields in canonical JSON.
-- **Lifecycle:** One scope per commit. Legacy tracks in `tracks_deprecated/` are read-only.
+- **Lifecycle:** One scope per commit. Legacy deprecated track files live only under `chatgpt/rest/_quarantine_legacy_7id/tracks_deprecated/` and are read-only. A root-level `tracks_deprecated/` directory, if present, is empty and is not used for legacy material.
 - **Structural rules:** No renaming of established structures. No aesthetic drift. No spontaneous refactors.
 - **Validation:** Before any modification run `python python/validate.py`. If FAIL: list violations; do not fix unless explicitly instructed.
-- **Active tracks:** Exactly 5. Defined in `schemas/track.schema.json` enum. `tracks/` holds only those; deprecated material in `tracks_deprecated/` only.
+- **Active tracks:** Exactly 5. Defined in `schemas/track.schema.json` enum. `tracks/` holds only those; deprecated material only in `chatgpt/rest/_quarantine_legacy_7id/tracks_deprecated/`.
 - **Schema breaking change policy:** Changes to `schemas/*.json` that remove required fields, narrow enum values, or change types are breaking. Require explicit approval and version bump. Additive changes (new optional fields, new enum values) are allowed with version bump. CI runs `python python/validate.py` on push/PR; breaking changes must not land without updating all consumers and data.
 
 ## STRUCTURAL DETERMINISM RULE
@@ -41,7 +41,7 @@ They must ALWAYS be inherited into future masterprompts.
 - **smart.** → prioritize solving complex structural problems
 - **execute.** → perform requested actions unconditionally
 
-**mola.** / **görev.** → behavior modifiers as defined in session (pause / task context).
+**mola.** / **görev.** → behavior modifiers as defined in session (pause / task context). For portable and Claude-facing use, only **feel.** / **think.** / **smart.** / **execute.** are canonical; mola./görev. are session-specific and need not be ported.
 
 These govern interaction logic, not repository content.
 

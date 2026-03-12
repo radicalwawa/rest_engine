@@ -17,7 +17,7 @@ There are exactly five active states:
 - radical.cream
 - radical.black
 
-Legacy 7-sin tracks exist only in tracks_deprecated and are read-only.
+Legacy 7-sin tracks exist only under chatgpt/rest/_quarantine_legacy_7id/ and are read-only.
 
 ---
 
@@ -60,15 +60,9 @@ All modifications must:
 
 ## MANDATORY FIRST ACTION ON ENTRY
 
-Run validate.py.
+Run validate.py from repo root.
 
-Confirm:
-
-- sound_library version >= 2.2
-- suggestion outputs validated
-- 5 tracks only in tracks/
-
-Output PASS or FAIL before changing anything.
+Confirm: 5 tracks in tracks/ and validation PASS. Output PASS or FAIL before changing anything. What validate.py checks is defined in python/validate.py and in claude/VALIDATION.md.
 
 ---
 
