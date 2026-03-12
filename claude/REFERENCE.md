@@ -43,7 +43,7 @@ Tooling only. Entry: `python/validate.py`. Scripts: `python/ui.py`, `python/dash
 
 ## sdm
 
-- `sdm/SDM_REST_SUCCESSOR.txt` — Handoff state, repo_head, mission, delta, hash history. Canonical SDM is outside repo.
+- `sdm/MIRAS.txt` — Handoff: structure, rules, identity. Canonical SDM is outside repo at `%USERPROFILE%\Desktop\SDM\sdm.json`.
 
 ## legacy quarantine
 

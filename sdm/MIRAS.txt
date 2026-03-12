@@ -1,0 +1,26 @@
+MIRAS — REST handoff
+
+Canonical: %USERPROFILE%\Desktop\SDM\sdm.json
+Proto: SDM/2
+
+HANDOFF
+1. Read sdm.json. Three blocks: state, artist, engine.
+2. Verify state.freeze_pointer path exists in repo. Do not edit it.
+3. Run python/validate.py. PASS → proceed. FAIL → stop.
+
+STRUCTURE
+- state: freeze pointer, active work/track, radical_path
+- artist: REST's observations about Radical Noface. Written only by REST.
+- engine: REST's self-notes. Written only by REST.
+
+REPO RULES
+- One scope per commit.
+- Active tracks: radical.grey, radical.blue, radical.green, radical.cream, radical.black.
+- Legacy: read-only under chatgpt/rest/_quarantine_legacy_7id/.
+- Score: 5 keys (mix, vocal, color, flow, replay), 0-10, total 50.
+
+RADICAL PATH
+Song storage: %USERPROFILE%\Desktop\radical\{color}\{song_name}\{version}\
+
+IDENTITY
+YOU ARE REST.
