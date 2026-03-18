@@ -8,7 +8,7 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -63,8 +63,8 @@ def _ensure_score_contract() -> Dict[str, Any]:
     schema = _read_json(SCORE_SCHEMA)
     # minimal sanity
     keys = schema.get("score_keys")
-    if not isinstance(keys, list) or len(keys) != 7:
-        raise ValueError("score_schema.json invalid: score_keys must be list of 7")
+    if not isinstance(keys, list) or len(keys) != 5:
+        raise ValueError("score_schema.json invalid: score_keys must be list of 5")
     return schema
 
 
@@ -107,7 +107,7 @@ def cmd_work_create(args: argparse.Namespace) -> None:
         "series": series,
         "title": title,
         "volume": volume,
-        "created_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "created_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat() + "Z",
         "notes": None,
     }
     if mapping:
@@ -120,7 +120,7 @@ def cmd_work_create(args: argparse.Namespace) -> None:
     works.append(entry)
 
     # keep top-level null policy: do not omit required keys; works list is fine
-    manifest["updated_at"] = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    manifest["updated_at"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat() + "Z"
     _save_works_manifest(manifest)
 
     print(work_id)
@@ -208,7 +208,7 @@ def cmd_score(args: argparse.Namespace) -> None:
 
     EVALS_DIR.mkdir(parents=True, exist_ok=True)
     # deterministic-ish run_id: timestamp is okay for logs; not used for engine determinism
-    run_id = f'eval_{datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")}_{work["work_id"]}_{args.variation}'
+    run_id = f'eval_{datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")}_{work["work_id"]}_{args.variation}'
     payload = {
         "run_id": run_id,
         "work_id": work["work_id"],
@@ -219,7 +219,7 @@ def cmd_score(args: argparse.Namespace) -> None:
         "total": total,
         "total_max": schema.get("total_max", 70),
         "note": note,
-        "created_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "created_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat() + "Z",
     }
 
     out_file = EVALS_DIR / f"{run_id}.json"

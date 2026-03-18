@@ -7,7 +7,7 @@ import json
 import subprocess
 import sys
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from textual.app import App, ComposeResult
@@ -81,7 +81,7 @@ def _git_dirty() -> bool:
 
 
 def _ts() -> str:
-    return datetime.utcnow().strftime("%H:%M:%S")
+    return datetime.now(timezone.utc).strftime("%H:%M:%S")
 
 
 def _find_identity(track_id: str) -> dict:
@@ -631,7 +631,7 @@ class RESTDashboard(App):
 
         out_dir = ROOT / "python" / "out" / "prompts"
         out_dir.mkdir(parents=True, exist_ok=True)
-        ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         out_path = out_dir / f"{self._active_track}__{ts}.txt"
         out_path.write_text(prompt_text, encoding="utf-8")
 
@@ -648,7 +648,7 @@ class RESTDashboard(App):
 
         out_dir = ROOT / "python" / "out" / "lyrics"
         out_dir.mkdir(parents=True, exist_ok=True)
-        ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         out_path = out_dir / f"{self._active_track}__{ts}.txt"
         out_path.write_text(lyrics, encoding="utf-8")
 
