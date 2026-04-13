@@ -1,1 +1,27 @@
-{"format":"multiline","sections":["TITLE","BPM_FEEL","PROD_DNA","VOCAL_DNA","CONSTRAINTS"],"prod_dna_key_order":["drum_language","bass_language","harmony_policy","ambience_policy","fx_policy","energy_curve"],"include_avoid_list":true,"include_focus_list":true,"notes":null}
+{
+  "version": "2.0",
+  "suno_version": "v5.5",
+  "format": "split",
+  "outputs": {
+    "style": "{track_id}__{variation}__style.txt",
+    "structure": "{track_id}__{variation}__structure.txt",
+    "combined": "{track_id}__{variation}__suno_prompt.txt"
+  },
+  "style_field": {
+    "char_limit": 1000,
+    "tag_order": ["genre", "subgenre", "bpm", "drums", "bass", "atmosphere", "mood", "production"],
+    "optimal_tag_count": [5, 8],
+    "weight_rule": "first tags carry most weight"
+  },
+  "lyrics_field": {
+    "char_limit": 3000,
+    "metatag_types": ["section_control", "instrumental", "vocal", "dynamic"],
+    "parameterized_syntax": "[Tag: modifier, descriptor]"
+  },
+  "sources": {
+    "kit_dna": "domain/suno_kits.json",
+    "voice_profiles": "domain/suno_voices.json",
+    "identities": "domain/album5_identities.json"
+  },
+  "notes": "v2.0: migrated from custom TITLE/PROD_DNA format to Suno v5.5 native split format (style + structure + combined reference)"
+}

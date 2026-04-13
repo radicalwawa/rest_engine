@@ -233,7 +233,7 @@ class RestTui(App[None]):
         Binding("q", "quit", "Quit"),
         Binding("c", "work_create", "Work create"),
         Binding("e", "export_prompt", "Export prompt"),
-        Binding("g", "generate", "Generate"),
+        Binding("g", "generate", "Batch export all"),
         Binding("l", "link", "Link work"),
         Binding("m", "mark_generated", "Mark generated"),
         Binding("k", "mark_scored", "Mark scored"),
@@ -369,31 +369,39 @@ class RestTui(App[None]):
             self._log("", str(e))
 
     def action_generate(self) -> None:
-        if not self._selected_work:
-            self._log("", "No work selected")
-            return
-        work_id = self._selected_work.get("work_id") or ""
-        track_id = self._selected_work.get("track_id") or ""
-        if not track_id:
-            self._log("", "No track_id")
-            return
-        try:
-            r = subprocess.run(
-                [
-                    sys.executable,
-                    str(SUNO_EXPORT_SCRIPT),
-                    "--track_id", track_id,
-                    "--variation", "v0",
-                ],
-                capture_output=True,
-                text=True,
-                cwd=ROOT,
-                timeout=30,
-            )
-            self._log(r.stdout or "", r.stderr or "")
-            self._refresh_works_list()
-        except Exception as e:
-            self._log("", str(e))
+        """Batch export: generate v0/v1/v2 for all 5 tracks."""
+        track_ids = [
+            "radical.grey", "radical.blue", "radical.green",
+            "radical.cream", "radical.black",
+        ]
+        variations = ["v0", "v1", "v2"]
+        total = 0
+        errors = 0
+        for tid in track_ids:
+            for var in variations:
+                try:
+                    r = subprocess.run(
+                        [
+                            sys.executable,
+                            str(SUNO_EXPORT_SCRIPT),
+                            "--track_id", tid,
+                            "--variation", var,
+                        ],
+                        capture_output=True,
+                        text=True,
+                        cwd=ROOT,
+                        timeout=30,
+                    )
+                    if r.returncode == 0:
+                        total += 1
+                    else:
+                        errors += 1
+                        self._log("", r.stderr or f"FAIL: {tid}/{var}")
+                except Exception as e:
+                    errors += 1
+                    self._log("", str(e))
+        self._log(f"Batch export: {total} ok, {errors} errors (5 tracks x 3 variations)", "")
+        self._refresh_works_list()
 
     def action_link(self) -> None:
         try:
