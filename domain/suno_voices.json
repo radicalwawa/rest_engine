@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "updated_at": null,
+  "notes": "Suno v5.5 voice profile specs per color identity. Each voice defines the vocal DNA for Suno Voices feature and in-lyrics metatags. artist_base: radical.noface (young_male_controlled, rhythmic_spoken, max 8 bars).",
+  "suno_version": "v5.5",
+  "global": {
+    "artist_id": "radical.noface",
+    "root_vocal_source": "user_acapella",
+    "suno_role": "skeleton_generator",
+    "vocal_melodic_range": "minimal",
+    "melodic_expressiveness": "disabled",
+    "performance_flash": "disabled",
+    "max_bars": 8,
+    "language": "tr"
+  },
+  "voices": [
+    {
+      "track_id": "radical.grey",
+      "color": "grey",
+      "state_label": "Concrete Rage",
+      "voice_character": "calm, ominous, controlled, cold",
+      "delivery_anchor": "hard_rap",
+      "suno_vocal_tags": ["[Rap]", "[Vocal Style: Monotone]", "[Vocal Style: Gritty]"],
+      "register": "low",
+      "intensity": "controlled",
+      "adlibs": false,
+      "hook_last_word_repeat": null,
+      "persona_notes": "Sakin ama tehdit eden ton. Beton duvar gibi. Asla bagirmaz, asla yumusak olmaz. Her kelime tartilmis. Nefes kontrollü, flow mekanik.",
+      "recording_spec": {
+        "mic_distance": "close",
+        "room_tone": "dead, dry",
+        "delivery_reference": "low register spoken rap, no singing, no emotion leak",
+        "sample_count_min": 3,
+        "sample_moods": ["cold_neutral", "controlled_aggression", "whispered_threat"]
+      }
+    },
+    {
+      "track_id": "radical.blue",
+      "color": "blue",
+      "state_label": "Blue Sorrow",
+      "voice_character": "tender, sad, restrained, spacious",
+      "delivery_anchor": "rap_or_spoken",
+      "suno_vocal_tags": ["[Spoken Word]", "[Vocal Style: Whisper]", "[Rap]"],
+      "register": "mid_low",
+      "intensity": "restrained",
+      "adlibs": null,
+      "hook_last_word_repeat": null,
+      "persona_notes": "Huzunlu ama aglayan degil. Mesafeli, icsel. Kelimeler arasinda bosluk birakir. Nefes duyulur. Bazen fisildamaya yakin.",
+      "recording_spec": {
+        "mic_distance": "close",
+        "room_tone": "slight room, not dead",
+        "delivery_reference": "mid-low spoken word, breathy, melancholic but not dramatic",
+        "sample_count_min": 3,
+        "sample_moods": ["quiet_sorrow", "restrained_reflection", "whispered_confession"]
+      }
+    },
+    {
+      "track_id": "radical.green",
+      "color": "green",
+      "state_label": "Saturated Growth",
+      "voice_character": "confident, expanding, building, alive",
+      "delivery_anchor": "rap_or_chanted",
+      "suno_vocal_tags": ["[Rap]", "[Vocal Style: Raspy]", "[Energy: Building]"],
+      "register": "mid",
+      "intensity": "building",
+      "adlibs": null,
+      "hook_last_word_repeat": null,
+      "persona_notes": "Buyuyen enerji. Baslangicta sakin, her verse ile yoğunluk artar. Kendinden emin ama bos degil. Dogal otorite. Chant'e yakin tekrar motifleri olabilir.",
+      "recording_spec": {
+        "mic_distance": "medium_close",
+        "room_tone": "minimal",
+        "delivery_reference": "mid register rap, starts calm ends intense, natural crescendo",
+        "sample_count_min": 3,
+        "sample_moods": ["calm_confident", "building_intensity", "peak_declaration"]
+      }
+    },
+    {
+      "track_id": "radical.cream",
+      "color": "cream",
+      "state_label": "Intimate Heat",
+      "voice_character": "warm, close, intimate, soft edge",
+      "delivery_anchor": "rap_sung_edge",
+      "suno_vocal_tags": ["[Rap]", "[Vocal Style: Whisper]", "[Vocal Style: Breathless]"],
+      "register": "mid",
+      "intensity": "intimate",
+      "adlibs": null,
+      "hook_last_word_repeat": null,
+      "persona_notes": "Yakin, sicak, kulaga fisildayan ton. Rap ama melodiye en yakin olan renk. Ritmik ama yumusak. Nefes sesi duyulur, bundan kacinma. Hook'larda hafif melodik edge.",
+      "recording_spec": {
+        "mic_distance": "very_close",
+        "room_tone": "dead, intimate booth",
+        "delivery_reference": "close whispered rap with melodic edge on hooks, warm breath audible",
+        "sample_count_min": 3,
+        "sample_moods": ["warm_whisper", "intimate_flow", "soft_hook_melodic"]
+      }
+    },
+    {
+      "track_id": "radical.black",
+      "color": "black",
+      "state_label": "Divine Smoke",
+      "voice_character": "solemn, mystic, steady, ritualistic",
+      "delivery_anchor": "chant_or_spoken",
+      "suno_vocal_tags": ["[Spoken Word]", "[Vocal Style: Monotone]", "[Vocal Style: Whisper]"],
+      "register": "low",
+      "intensity": "steady",
+      "adlibs": null,
+      "hook_last_word_repeat": null,
+      "persona_notes": "Rituel tonu. Rahip gibi, saman gibi. Tekrar eden cumle yapilari. Monoton ama hipnotik. Zaman zaman fisiltiya duser. Asla hizlanmaz, asla yukseltemez.",
+      "recording_spec": {
+        "mic_distance": "close",
+        "room_tone": "large room hint, cathedral-like",
+        "delivery_reference": "low monotone spoken word, chant-like repetition, solemn and steady",
+        "sample_count_min": 3,
+        "sample_moods": ["ritual_steady", "solemn_whisper", "chant_repetition"]
+      }
+    }
+  ]
+}
