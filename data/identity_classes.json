@@ -1,0 +1,67 @@
+{
+  "grey": {
+    "name": "Ember",
+    "structure": "nakarat + 4x4 bar",
+    "flow": "UK drill — soğuk, hesaplı, patlamayan",
+    "bar_target": 16,
+    "block_size": 4,
+    "requires_chorus": true,
+    "warnings": [
+      "4 bar bloğu kırıldı",
+      "nakarat bulunamadı",
+      "ton ısınıyor — agresyon kontrolü"
+    ]
+  },
+  "green": {
+    "name": "Cypress",
+    "structure": "16 bar, 2x8 blok",
+    "flow": "mermi gibi — kesik, sert, boşluk yok",
+    "bar_target": 16,
+    "block_size": 8,
+    "requires_chorus": false,
+    "warnings": [
+      "8 bar bloğu aşıldı",
+      "yapı kırıldı",
+      "akış yumuşuyor"
+    ]
+  },
+  "blue": {
+    "name": "Tide",
+    "structure": "serbest, hook merkezli",
+    "flow": "cloud rap — sürüklenen, boşluk ağırlıklı",
+    "bar_target": null,
+    "block_size": null,
+    "requires_hook": true,
+    "warnings": [
+      "hook bulunamadı",
+      "akış sertleşiyor",
+      "boşluklar kayboluyor"
+    ]
+  },
+  "cream": {
+    "name": "Ivory",
+    "structure": "verse/chorus/bridge, 8 bar verse",
+    "flow": "neo-soul — samimi, kırılgan, nefesli",
+    "bar_target": 8,
+    "block_size": 8,
+    "requires_bridge": true,
+    "warnings": [
+      "8 bar verse aşıldı",
+      "bridge bulunamadı",
+      "agresyon tespit edildi"
+    ]
+  },
+  "black": {
+    "name": "Nightfall",
+    "structure": "chant/loop bazlı, minimal kelime",
+    "flow": "rave tekno — tekrarcı, trans, benliksiz",
+    "bar_target": null,
+    "block_size": null,
+    "requires_repetition": true,
+    "warnings": [
+      "anlatı tespit edildi",
+      "kişisel referans var",
+      "yapı karmaşıklaştı"
+    ]
+  }
+}

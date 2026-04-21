@@ -1,0 +1,79 @@
+/* identity_panels — per-cap palettes. Only lyrics-internal styling. */
+
+Screen {
+    background: #0a0a0a;
+}
+
+#identity-list {
+    width: 24;
+    border: round #3a3a3a;
+}
+
+.identity-panel {
+    padding: 0 1;
+    border: round #3a3a3a;
+}
+
+.identity-header {
+    padding: 0 1;
+    text-style: bold;
+}
+
+.identity-structure {
+    color: #888888;
+    padding: 0 1;
+}
+
+.identity-textarea {
+    height: 1fr;
+    min-height: 16;
+}
+
+.identity-footer {
+    height: 1;
+    padding: 0 1;
+}
+
+.identity-bar-counter {
+    width: 28;
+    color: #b8b8b8;
+}
+
+.identity-warning {
+    color: #d4a017;
+    text-style: italic;
+}
+
+.identity-warning-clear {
+    color: #3a3a3a;
+}
+
+/* ---- grey — Ember ---- */
+.cap-grey .identity-header     { color: #d0d0d0; background: #181818; }
+.cap-grey .identity-structure  { color: #8a8a8a; }
+.cap-grey .identity-bar-counter{ color: #c8c8c8; }
+.cap-grey .identity-textarea   { background: #121212; color: #e8e8e8; }
+
+/* ---- blue — Tide ---- */
+.cap-blue .identity-header     { color: #9fc5e8; background: #0c1824; }
+.cap-blue .identity-structure  { color: #6a8cb0; }
+.cap-blue .identity-bar-counter{ color: #9fc5e8; }
+.cap-blue .identity-textarea   { background: #08141f; color: #cfe2f3; }
+
+/* ---- green — Cypress ---- */
+.cap-green .identity-header    { color: #7bc96f; background: #0a1a0a; }
+.cap-green .identity-structure { color: #4a8c4a; }
+.cap-green .identity-bar-counter{ color: #7bc96f; }
+.cap-green .identity-textarea  { background: #081408; color: #b8e8b0; }
+
+/* ---- cream — Ivory ---- */
+.cap-cream .identity-header    { color: #f5e6d3; background: #241a0c; }
+.cap-cream .identity-structure { color: #c8a878; }
+.cap-cream .identity-bar-counter{ color: #f5e6d3; }
+.cap-cream .identity-textarea  { background: #1a1208; color: #f5e6d3; }
+
+/* ---- black — Nightfall ---- */
+.cap-black .identity-header    { color: #e8e8e8; background: #000000; }
+.cap-black .identity-structure { color: #606060; }
+.cap-black .identity-bar-counter{ color: #b8b8b8; }
+.cap-black .identity-textarea  { background: #050505; color: #e8e8e8; }
