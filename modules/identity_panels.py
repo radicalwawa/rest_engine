@@ -23,7 +23,7 @@ from typing import Callable, Iterable
 ROOT = Path(__file__).resolve().parents[1]
 CLASSES_PATH = ROOT / "data" / "identity_classes.json"
 
-CAP_ORDER: tuple[str, ...] = ("grey", "blue", "green", "cream", "black")
+CAP_ORDER: tuple[str, ...] = ("green", "grey", "blue", "cream", "black")  # C.E.T.I.N
 
 # ---------------------------------------------------------------------- tags
 
@@ -337,9 +337,9 @@ if _TEXTUAL:
         CSS_PATH = "identity_panels.tcss"
         BINDINGS = [
             Binding("ctrl+q", "quit", "Quit", priority=True),
-            Binding("ctrl+1", "select('grey')", "Ember", priority=True),
-            Binding("ctrl+2", "select('blue')", "Tide", priority=True),
-            Binding("ctrl+3", "select('green')", "Cypress", priority=True),
+            Binding("ctrl+1", "select('green')", "Cypress", priority=True),
+            Binding("ctrl+2", "select('grey')", "Ember", priority=True),
+            Binding("ctrl+3", "select('blue')", "Tide", priority=True),
             Binding("ctrl+4", "select('cream')", "Ize", priority=True),
             Binding("ctrl+5", "select('black')", "Nightfall", priority=True),
         ]
@@ -348,7 +348,7 @@ if _TEXTUAL:
             super().__init__(**kw)
             self._class_map = class_map or load_classes()
             self._panels: dict[str, IdentityPanel] = {}
-            self._active: str = "grey"
+            self._active: str = "green"
             self._list: ListView | None = None
 
         def compose(self) -> ComposeResult:
