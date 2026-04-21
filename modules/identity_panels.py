@@ -186,7 +186,7 @@ def check_tide(text: str, cfg: dict) -> list[str]:
 
 
 def check_ize(text: str, cfg: dict) -> list[str]:
-    """cream — Ize: verse/chorus/bridge, 8 bar verse (deep house, yazlık)."""
+    """cream — Ize: verse/chorus/bridge, 8 bar verse."""
     out: list[str] = []
     size = cfg.get("block_size") or 8
     if max_consecutive_bars(text) > size:
