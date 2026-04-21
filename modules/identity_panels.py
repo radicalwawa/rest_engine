@@ -185,8 +185,8 @@ def check_tide(text: str, cfg: dict) -> list[str]:
     return [w for w in out if w]
 
 
-def check_ivory(text: str, cfg: dict) -> list[str]:
-    """cream — Ivory: verse/chorus/bridge, 8 bar verse."""
+def check_ize(text: str, cfg: dict) -> list[str]:
+    """cream — Ize: verse/chorus/bridge, 8 bar verse (deep house, yazlık)."""
     out: list[str] = []
     size = cfg.get("block_size") or 8
     if max_consecutive_bars(text) > size:
@@ -222,7 +222,7 @@ CHECKERS: dict[str, Callable[[str, dict], list[str]]] = {
     "grey": check_ember,
     "green": check_cypress,
     "blue": check_tide,
-    "cream": check_ivory,
+    "cream": check_ize,
     "black": check_nightfall,
 }
 
@@ -340,7 +340,7 @@ if _TEXTUAL:
             Binding("ctrl+1", "select('grey')", "Ember", priority=True),
             Binding("ctrl+2", "select('blue')", "Tide", priority=True),
             Binding("ctrl+3", "select('green')", "Cypress", priority=True),
-            Binding("ctrl+4", "select('cream')", "Ivory", priority=True),
+            Binding("ctrl+4", "select('cream')", "Ize", priority=True),
             Binding("ctrl+5", "select('black')", "Nightfall", priority=True),
         ]
 

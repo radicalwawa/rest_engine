@@ -74,7 +74,7 @@
 .cap-green .identity-bar-counter{ color: #7bc96f; }
 .cap-green .identity-textarea  { background: #081408; color: #b8e8b0; }
 
-/* ---- cream — Ivory ---- */
+/* ---- cream — Ize ---- */
 .cap-cream .identity-header    { color: #f5e6d3; background: #241a0c; }
 .cap-cream .identity-structure { color: #c8a878; }
 .cap-cream .identity-bar-counter{ color: #f5e6d3; }
