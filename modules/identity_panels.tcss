@@ -1,6 +1,8 @@
-/* identity_panels — per-cap palettes. Only lyrics-internal styling. */
+/* identity_panels — per-cap palettes. Only lyrics-internal styling.
+   Outer frame (#0a0a0a) scoped via #identity-root so the kernel
+   dashboard's Screen styling is never overridden. */
 
-Screen {
+#identity-root {
     background: #0a0a0a;
 }
 
@@ -10,28 +12,34 @@ Screen {
 }
 
 .identity-panel {
-    padding: 0 1;
+    padding: 0;
     border: round #3a3a3a;
 }
 
 .identity-header {
     padding: 0 1;
     text-style: bold;
+    height: 1;
 }
 
 .identity-structure {
     color: #888888;
     padding: 0 1;
+    height: 1;
+    border-bottom: solid #3a3a3a;
 }
 
 .identity-textarea {
     height: 1fr;
     min-height: 16;
+    border: none;
+    padding: 0 1;
 }
 
 .identity-footer {
     height: 1;
     padding: 0 1;
+    border-top: solid #3a3a3a;
 }
 
 .identity-bar-counter {

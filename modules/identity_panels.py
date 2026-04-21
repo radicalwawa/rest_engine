@@ -353,7 +353,7 @@ if _TEXTUAL:
 
         def compose(self) -> ComposeResult:
             yield Header(show_clock=False)
-            with Horizontal():
+            with Horizontal(id="identity-root"):
                 items = []
                 for cap in CAP_ORDER:
                     name = self._class_map[cap]["name"]
