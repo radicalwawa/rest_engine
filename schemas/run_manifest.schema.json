@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "rest_engine/schemas/run_manifest.schema.json",
+  "version": "1.0.0",
   "title": "REST Run Manifest Schema",
   "type": "object",
   "additionalProperties": false,

@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "rest_engine/schemas/track.schema.json",
+  "version": "1.0.0",
   "title": "REST Track Schema",
   "type": "object",
   "additionalProperties": false,
