@@ -33,6 +33,33 @@ Parça kimlikleri: radical.grey, radical.blue, radical.green, radical.cream, rad
 - **Cursor:** Çalıştırma disiplini; kurallar `.cursor/rules/`.
 - **Suno:** Export ve prompt pipeline; parçalar ve sound library ile bağlantılı.
 
+## v2.0 — SQL Operasyonel Katman (Phase 1+2)
+
+- **rest_engine.db** — SQLite operasyonel state. Şema `migrations/` altında,
+  `domain/identities_v3_seed.json`'dan seed'lenir.
+- **db_manager.py** — `rest_engine.db` üzerine CRUD katmanı. Tüm DB erişimi buradan.
+- **prompt_engine.py** — Suno prompt varyasyonları (base, bpm_shift, mood_shift,
+  instrument_swap, energy_shift, track). DB destekli.
+- **daily_pipeline.py** — Operasyonel akış: `init_daily_queue` → `stage_prompts` →
+  `process_queue_item` → `review_beat`.
+- **tui.py** — Textual dashboard. 5 renk identity paneli, rating + notes UI, MP3
+  arşiv akışı.
+- **sdm_tool.py** — Successor Document Memo (MIRAS) bookkeeping. Komutlar:
+  `touch <sdm.json>`, `event`, `mission`.
+
+### Akış: Suno → arşiv → puan
+1. Suno'da prompt'tan track üret.
+2. mp3'ü `rest_inbox/` klasörüne indir.
+3. `register_beat_mp3(color, track_name)` çağır (veya TUI üzerinden). MP3
+   `archive/beats/<color>/<track>/<track>_vN.mp3` yoluna kopyalanır, beats satırı eklenir.
+4. 5 boyutu (id, flow, beat, energy, replay) 1–5 arası puanla + serbest not.
+5. notes tablosu color-scoped feedback tutar; `prompt_engine` sonraki üretimde okur.
+
+### Testler
+`tests/validation_phase1.py` ve
+`tests/validation_phase2_step_{a,a2,b,b2,c,d,e,f,g}.py`'de 10/10 validation suite.
+Hepsi idempotent.
+
 ## Sound Library
 
 - `knowledge/sound_library.json` — varlık kataloğu (şema: `schemas/sound_library.schema.json`).
