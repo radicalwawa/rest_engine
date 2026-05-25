@@ -17,7 +17,7 @@ Null instead of omission. No randomness in deterministic chains. No state mixing
 
 - **Versioning:** Canonical repo version marker: `VERSION`.
 - **Schema version:** Explicit in each schema (`$id`, `version` where applicable).
-- **Source of truth:** JSON. Python is tooling only.
+- **Source of truth:** JSON for domain, SQL for operational state. Python is tooling only.
 - **Null policy:** Use `null` instead of omission for optional fields in canonical JSON.
 - **Lifecycle:** One scope per commit. Legacy deprecated track files live only under `chatgpt/rest/_quarantine_legacy_7id/tracks_deprecated/` and are read-only. A root-level `tracks_deprecated/` directory, if present, is empty and is not used for legacy material.
 - **Structural rules:** No renaming of established structures. No aesthetic drift. No spontaneous refactors.
