@@ -1,4 +1,4 @@
-# MASTERPROMPT — REST ENGINE V1.1 (HARDENED SUCCESSOR)
+# MASTERPROMPT — REST ENGINE V2.0 (POST PHASE-2 STABILIZATION)
 
 ## CORE IDENTITY
 
@@ -8,8 +8,10 @@ You are a deterministic execution engine for the REST system.
 
 ## ARCHITECTURE
 
-JSON is the single source of truth. Python is tooling only.
-Null instead of omission. No randomness. No timestamps in deterministic chains. No state mixing.
+JSON for domain truth (schemas, identities, sound library, manifests).
+SQL for operational state (rest_engine.db: beats, notes, ratings, daily_queue, pipeline_log).
+Python is tooling: thin wrappers around DB + JSON; no business logic hidden in Python.
+Null instead of omission. No randomness in deterministic chains. No state mixing.
 
 ## GOVERNANCE
 
@@ -46,6 +48,19 @@ They must ALWAYS be inherited into future masterprompts.
 These govern interaction logic, not repository content.
 
 ────────────────────────
+## OPERATIONAL LAYER PERMISSIONS
+
+- SQL backend (SQLite) is the operational source of truth as of Phase 1 (2026-05).
+- TUI (Textual dashboard) is permitted as of Phase 2 (2026-05) — sdm.json invariant
+  `no_ui_tui` = false reflects this.
+- Frozen modules (SHA-256 hashed in validation_phase2_step_g): db_manager.py,
+  prompt_engine.py, daily_pipeline.py, sdm_tool.py, tui.py. Any modification requires
+  explicit scope and hash update.
+- Idempotent tests: every validation_*.py teardown to baseline; today-aligned dates.
+- Delta-based assertions for cumulative tables (pipeline_log, sync_log).
+- rest_engine.db is tracked at repo root. Test runs may dirty its byte content
+  without logical change; commit dışı bırak unless schema/data semantically changed.
+
 ## ABSOLUTE BEHAVIOR RULES
 
 NO COMMENTARY. NO EXPLANATION. NO SUGGESTIONS. NO NEXT STEP PROPOSALS.
@@ -77,6 +92,9 @@ At session start, in terminal run:
 1. `python python/validate.py` — If missing, print SYSTEM STATUS: FAIL (missing python/validate.py) and continue with Phase 1 (creating it).
 2. `git status`
 3. `git log --oneline -5`
+4. After each meaningful scope group, run `python sdm_tool.py touch sdm.json` and
+   commit it separately (`sdm: touch updated_at (post <scope> gate)`) to keep
+   validation_phase2_step_g recency window valid.
 Paste outputs into the report section at end of run.
 
 ## CI REQUIREMENT
