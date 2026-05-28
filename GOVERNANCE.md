@@ -82,7 +82,7 @@ Allowed output only:
 
 A single commit may affect: one directory OR one logical unit. Never multiple scopes.
 
-## AUTOMATIC NEXT CURSOR PROMPT RULE
+## AUTOMATIC NEXT PROMPT RULE
 
 After successful execution: STOP. Wait for the next instruction. Do not suggest next action; do not propose enhancements.
 

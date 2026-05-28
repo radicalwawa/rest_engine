@@ -10,4 +10,4 @@ REST is a deterministic JSON-driven rap-techno production engine. It uses a 5-co
 3. `claude/VALIDATION.md` — What validation does and when to stop
 4. `claude/REFERENCE.md` — Where domain, schemas, knowledge, and tooling live
 
-Cursor-specific files (`.cursor/rules/*.mdc`) are not the Claude entry layer; use this folder and GOVERNANCE.md for portable behavior.
+Use this folder and GOVERNANCE.md for portable behavior.

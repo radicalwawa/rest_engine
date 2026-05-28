@@ -16,7 +16,6 @@ Policy: GOVERNANCE.md, docs/PRODUCTION_LOCK.md. Claude entry: `claude/README.md`
 
 - **JSON / Schemas:** Single source of truth. Schemas in `schemas/`. Null instead of omission.
 - **Python:** Tooling only. `python/validate.py`, production scripts under `python/production/`.
-- **Cursor:** Execution discipline; rules in `.cursor/rules/`.
 - **Suno:** Export and prompt pipeline; references tracks and sound library.
 
 ## v2.0 — SQL Operational Layer (Phase 1+2)

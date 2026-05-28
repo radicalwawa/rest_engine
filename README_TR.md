@@ -30,7 +30,6 @@ Parça kimlikleri: radical.grey, radical.blue, radical.green, radical.cream, rad
 
 - **JSON / Şemalar:** Tek gerçek kaynak. Şemalar `schemas/`. Eksik yerine null.
 - **Python:** Sadece araç. `python/validate.py`, `python/production/` altında üretim betikleri.
-- **Cursor:** Çalıştırma disiplini; kurallar `.cursor/rules/`.
 - **Suno:** Export ve prompt pipeline; parçalar ve sound library ile bağlantılı.
 
 ## v2.0 — SQL Operasyonel Katman (Phase 1+2)
