@@ -20,3 +20,6 @@ desktop.ini
 *.db-shm
 *.db-wal
 *.db-journal
+
+# local Claude Code settings (not tracked)
+.claude/settings.local.json
