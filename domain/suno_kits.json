@@ -1,0 +1,200 @@
+{
+  "version": "1.0",
+  "updated_at": null,
+  "notes": "Suno v5.5 instrument kit DNA per color identity. Style prompts are comma-separated tags for the Style of Music field (max 1000 chars). Structure templates use Suno metatags for the Lyrics field.",
+  "suno_version": "v5.5",
+  "style_char_limit": 1000,
+  "lyrics_char_limit": 3000,
+  "kits": [
+    {
+      "track_id": "radical.grey",
+      "color": "grey",
+      "state_label": "Concrete Rage",
+      "style_prompt": "industrial techno, minimal techno, 130 BPM, dry punchy mechanical drums, sub bass, cold sparse atmosphere, raw, warehouse, dark, aggressive, no melody, instrumental",
+      "style_tags_ordered": [
+        "industrial techno",
+        "minimal techno",
+        "130 BPM",
+        "dry punchy mechanical drums",
+        "sub bass",
+        "cold sparse atmosphere",
+        "raw",
+        "warehouse",
+        "dark",
+        "aggressive",
+        "no melody",
+        "instrumental"
+      ],
+      "structure_template": "[Instrumental Intro: cold, mechanical, 4 bars]\n[Instrumental: dry kick + sub pressure, industrial percussion loop]\n[Build: tension rising, minimal layers]\n[Instrumental: peak pressure, relentless, flat energy]\n[Instrumental Break: stripped to kick + sub]\n[Instrumental: industrial textures return, controlled aggression]\n[Outro: fade to silence]",
+      "instrument_palette": {
+        "kick": "dry, punchy, mechanical, short decay",
+        "bass": "sub, single note, threatening, minimal movement",
+        "percussion": "industrial hits, metallic textures, sparse hi-hats",
+        "synth": "none or minimal cold stabs",
+        "ambience": "cold reverb tails, factory noise, sparse"
+      },
+      "fx_profile": {
+        "reverb": "low, short",
+        "delay": "controlled, minimal",
+        "distortion": "present but restrained",
+        "stereo_width": "moderate, focused"
+      },
+      "bpm_target": 130,
+      "bpm_range": [128, 132],
+      "energy_curve": "flat_pressure_increase",
+      "groove": "straight",
+      "crowding_tags": ["purely electronic", "synthesized sounds only", "no acoustic instruments", "no piano", "no guitar", "no bright melodies"]
+    },
+    {
+      "track_id": "radical.blue",
+      "color": "blue",
+      "state_label": "Blue Sorrow",
+      "style_prompt": "dub techno, deep techno, 125 BPM, deep soft drums, round heavy bass, dub chords, wide dark liquid atmosphere, rhythmic dub delay, spacious, melancholic, instrumental",
+      "style_tags_ordered": [
+        "dub techno",
+        "deep techno",
+        "125 BPM",
+        "deep soft drums",
+        "round heavy bass",
+        "dub chords",
+        "wide dark liquid atmosphere",
+        "rhythmic dub delay",
+        "spacious",
+        "melancholic",
+        "instrumental"
+      ],
+      "structure_template": "[Instrumental Intro: dub delay wash, spacious pads, 4 bars]\n[Instrumental: deep kick + round bass, soft hi-hats, dub chords emerge]\n[Instrumental: delay trails build, atmosphere deepens]\n[Breakdown: stripped to delay tails + sub, wide stereo]\n[Instrumental: layers return gently, slow wave energy]\n[Instrumental: full depth, dub delay dominant]\n[Outro: Fade Out, delay trails dissolve]",
+      "instrument_palette": {
+        "kick": "deep, soft, round, long release",
+        "bass": "round, heavy, gentle movement, warm sub",
+        "percussion": "soft hi-hats, minimal clicks, no snap",
+        "synth": "dub chords, sparse pads, filtered stabs",
+        "ambience": "wide reverb, dark liquid textures, delay trails"
+      },
+      "fx_profile": {
+        "reverb": "medium, wide hall",
+        "delay": "rhythmic dub, ping-pong, dominant",
+        "distortion": "very low, warmth only",
+        "stereo_width": "wide, immersive"
+      },
+      "bpm_target": 125,
+      "bpm_range": [122, 128],
+      "energy_curve": "slow_wave",
+      "groove": "straight",
+      "crowding_tags": ["purely electronic", "no bright pop melodies", "no aggressive distortion", "no festival energy", "no acoustic guitar"]
+    },
+    {
+      "track_id": "radical.green",
+      "color": "green",
+      "state_label": "Saturated Growth",
+      "style_prompt": "progressive techno, percussive techno, 127 BPM, layered percussion, driving evolving bass, minimal motif, alive textured atmosphere, building energy, hypnotic, instrumental",
+      "style_tags_ordered": [
+        "progressive techno",
+        "percussive techno",
+        "127 BPM",
+        "layered percussion",
+        "driving evolving bass",
+        "minimal motif",
+        "alive textured atmosphere",
+        "building energy",
+        "hypnotic",
+        "instrumental"
+      ],
+      "structure_template": "[Instrumental Intro: single percussion element, space]\n[Instrumental: kick enters, bass motif begins, layers adding]\n[Build: percussion layers multiply, energy rising]\n[Instrumental: full percussion ensemble, driving bass, motif evolved]\n[Breakdown: stripped to motif + texture, breathing space]\n[Build: gradual return of layers, new percussion elements]\n[Instrumental: peak energy, all layers, growth complete]\n[Outro: layers subtract one by one]",
+      "instrument_palette": {
+        "kick": "clear, present, tight transient",
+        "bass": "driving, evolving filter movement, acid-adjacent",
+        "percussion": "layered congas, shakers, rides, toms, claps",
+        "synth": "minimal motif, evolving arpeggios, subtle",
+        "ambience": "alive textures, organic noise, breathing space"
+      },
+      "fx_profile": {
+        "reverb": "low to medium, focused",
+        "delay": "subtle motion, synced",
+        "distortion": "low, saturation on bass",
+        "stereo_width": "moderate, layered"
+      },
+      "bpm_target": 127,
+      "bpm_range": [124, 130],
+      "energy_curve": "growth_ramp",
+      "groove": "straight",
+      "crowding_tags": ["purely electronic", "no static loops", "no hands-up chords", "no big-room risers", "no vocal hooks"]
+    },
+    {
+      "track_id": "radical.cream",
+      "color": "cream",
+      "state_label": "Intimate Heat",
+      "style_prompt": "uk garage, 2-step, deep house, 131 BPM, shuffled swing beat, warm bouncy bass, soft snare snap, warm minimal chords, close intimate atmosphere, smooth, instrumental",
+      "style_tags_ordered": [
+        "uk garage",
+        "2-step",
+        "deep house",
+        "131 BPM",
+        "shuffled swing beat",
+        "warm bouncy bass",
+        "soft snare snap",
+        "warm minimal chords",
+        "close intimate atmosphere",
+        "smooth",
+        "instrumental"
+      ],
+      "structure_template": "[Instrumental Intro: soft 2-step groove, warm pad, 4 bars]\n[Instrumental: full groove enters, bouncy bass, shuffled beat]\n[Instrumental: chord warmth increases, intimate pulse]\n[Breakdown: bass + pad only, close and warm]\n[Instrumental: groove returns, soft snap, subtle groove variation]\n[Instrumental: full warmth, intimate energy peak]\n[Outro: groove thins, pad sustains, gentle end]",
+      "instrument_palette": {
+        "kick": "soft, warm, bouncy, garage-weight",
+        "bass": "warm, bouncy, round, close, sub-present",
+        "percussion": "2-step hi-hats, soft snare snap, shuffled shakers",
+        "synth": "warm chords, rhodes-adjacent, soft glow pads",
+        "ambience": "close room, soft glow, intimate, no distance"
+      },
+      "fx_profile": {
+        "reverb": "low to medium, close room",
+        "delay": "tasteful, subtle",
+        "distortion": "none",
+        "stereo_width": "moderate, centered warmth"
+      },
+      "bpm_target": 131,
+      "bpm_range": [128, 134],
+      "energy_curve": "intimate_pulse",
+      "groove": "swing",
+      "crowding_tags": ["purely electronic", "no bright pop chorus", "no aggressive grit", "no industrial textures", "no supersaws"]
+    },
+    {
+      "track_id": "radical.black",
+      "color": "black",
+      "state_label": "Divine Smoke",
+      "style_prompt": "hypnotic techno, ambient techno, drone, 129 BPM, hypnotic ritual drums, low drone bass, wide dark smoke atmosphere, slow haze delay, repetitive, trance-inducing, instrumental",
+      "style_tags_ordered": [
+        "hypnotic techno",
+        "ambient techno",
+        "drone",
+        "129 BPM",
+        "hypnotic ritual drums",
+        "low drone bass",
+        "wide dark smoke atmosphere",
+        "slow haze delay",
+        "repetitive",
+        "trance-inducing",
+        "instrumental"
+      ],
+      "structure_template": "[Instrumental Intro: Fade In, drone bed, smoke atmosphere, 8 bars]\n[Instrumental: ritual kick enters, hypnotic loop begins, sub drone]\n[Instrumental: loop deepens, haze delay trails, repetition builds trance]\n[Breakdown: drone + smoke only, wide stereo, no kick]\n[Instrumental: ritual percussion returns, loop unchanged, hypnotic lock]\n[Instrumental: peak ritual density, all layers sustained, no drop]\n[Outro: Fade Out, drone sustains, smoke dissolves]",
+      "instrument_palette": {
+        "kick": "soft, hypnotic, ritual weight, steady",
+        "bass": "low drone, sub, sustained, minimal movement",
+        "percussion": "ritual shakers, tribal hits, minimal hi-hat",
+        "synth": "drone pads, no melody, sustained tones",
+        "ambience": "smoke, wide dark reverb, haze, cavernous"
+      },
+      "fx_profile": {
+        "reverb": "medium, cavernous, long tail",
+        "delay": "slow haze, long feedback",
+        "distortion": "low, warmth",
+        "stereo_width": "wide, enveloping"
+      },
+      "bpm_target": 129,
+      "bpm_range": [126, 132],
+      "energy_curve": "ritual_trance",
+      "groove": "straight",
+      "crowding_tags": ["purely electronic", "no melodic hooks", "no bright hi-hats", "no festival build-ups", "no vocal hooks", "no drops"]
+    }
+  ]
+}

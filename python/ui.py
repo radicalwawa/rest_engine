@@ -27,6 +27,21 @@ VALIDATE_SCRIPT = ROOT / "python" / "validate.py"
 
 TRACK_IDS = ["radical.grey", "radical.blue", "radical.green", "radical.cream", "radical.black"]
 
+LIFECYCLE_ORDER = [None, "prompt_generated", "generated", "scored", "best"]
+
+
+def _transition_allowed(current: Optional[str], target: str) -> bool:
+    if current is None or current == "null":
+        cur_idx = 0
+    elif current in LIFECYCLE_ORDER:
+        cur_idx = LIFECYCLE_ORDER.index(current)
+    else:
+        return False
+    if target not in LIFECYCLE_ORDER:
+        return False
+    target_idx = LIFECYCLE_ORDER.index(target)
+    return target_idx == cur_idx + 1
+
 
 def _read_json(path: Path) -> Dict[str, Any]:
     if not path.exists():
@@ -178,6 +193,49 @@ def _score_input(keys: List[str]) -> Dict[str, int]:
     return scores
 
 
+def cmd_work_update(args: argparse.Namespace) -> None:
+    manifest = _load_works_manifest()
+    works: List[Dict[str, Any]] = manifest.get("works", [])
+    work = next((w for w in works if w.get("work_id") == args.work_id), None)
+    if work is None:
+        raise ValueError(f"work_id not found: {args.work_id}")
+
+    current_status = work.get("status")
+
+    if args.status is not None:
+        if not _transition_allowed(current_status, args.status):
+            current_label = current_status if current_status is not None else "null"
+            raise ValueError(
+                f"Invalid transition: {current_label} -> {args.status}"
+            )
+        work["status"] = args.status
+
+    if args.suggestion_hash is not None:
+        work["suggestion_hash"] = args.suggestion_hash
+    elif "suggestion_hash" not in work:
+        work["suggestion_hash"] = None
+
+    if args.seed_hash_hex is not None:
+        work["seed_hash_hex"] = args.seed_hash_hex
+    elif "seed_hash_hex" not in work:
+        work["seed_hash_hex"] = None
+
+    if args.prompt_version is not None:
+        work["prompt_version"] = args.prompt_version
+    elif "prompt_version" not in work:
+        work["prompt_version"] = None
+
+    if args.export_path is not None:
+        work["export_path"] = args.export_path
+    elif "export_path" not in work:
+        work["export_path"] = None
+
+    manifest["updated_at"] = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    _save_works_manifest(manifest)
+
+    print(f"updated {args.work_id} -> status={work.get('status')}")
+
+
 def cmd_score(args: argparse.Namespace) -> None:
     _ensure_score_contract()
     schema = _read_json(SCORE_SCHEMA)
@@ -239,6 +297,15 @@ def build_parser() -> argparse.ArgumentParser:
     p_wc.add_argument("--title", required=True)
     p_wc.add_argument("--volume", required=True)
     p_wc.set_defaults(func=cmd_work_create)
+
+    p_wu = sp.add_parser("work-update", help="Update a work entry (status, hashes, export_path)")
+    p_wu.add_argument("--work_id", required=True)
+    p_wu.add_argument("--status", default=None, choices=["prompt_generated", "generated", "scored", "best"])
+    p_wu.add_argument("--suggestion_hash", default=None)
+    p_wu.add_argument("--seed_hash_hex", default=None)
+    p_wu.add_argument("--prompt_version", default=None)
+    p_wu.add_argument("--export_path", default=None)
+    p_wu.set_defaults(func=cmd_work_update)
 
     p_wl = sp.add_parser("work-list", help="List works")
     p_wl.set_defaults(func=cmd_work_list)
